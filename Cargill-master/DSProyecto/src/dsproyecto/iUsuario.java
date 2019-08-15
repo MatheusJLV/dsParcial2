@@ -14,4 +14,5 @@ public interface iUsuario {
     String password="";
     
     public void Login();
+    public void PermisosExtras();
 }
