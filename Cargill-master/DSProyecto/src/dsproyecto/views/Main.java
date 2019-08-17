@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dsproyecto;
+package dsproyecto.views;
 
-import dsproyecto.views.Login;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -16,12 +15,12 @@ import javafx.stage.Stage;
  *
  * @author medin
  */
-public class DSProyecto extends Application{
+public class Main extends Application{
 
     /**
      * @param args the command line arguments
      */
-   
+    
     Pane root=new Pane();
     Scene scene ;
     public static void main(String[] args) {
@@ -40,5 +39,6 @@ public class DSProyecto extends Application{
         primaryStage.show();
    
     }
-    
 }
+    
+
