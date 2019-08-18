@@ -24,7 +24,7 @@ import javafx.stage.Stage;
  *
  * @author medin
  */
-public class Screen_Data {
+public class Screen_DataArticulos {
     Label l1=new Label(),l2=new Label(),l3=new Label(),l4=new Label(),l5=new Label(),l6=new Label(),l7=new Label(),l8=new Label(),l9=new Label(),l10=new Label(),l11=new Label("");
     TextField t1=new TextField(),t2=new TextField(),t3=new TextField(),t4=new TextField(),t5=new TextField(),t6=new TextField(),t7=new TextField(),t8=new TextField(),t9=new TextField(),t10=new TextField();
     Button bt= new Button("Done");
@@ -50,7 +50,7 @@ public class Screen_Data {
     
     boolean Pedido=false;
     
-    public Screen_Data(Connection con,String query,ObservableList rowList, int add0,String Updatequery) {
+    public Screen_DataArticulos(Connection con,String query,ObservableList rowList, int add0,String Updatequery) {
         this.con=con;
         this.query=query;
         this.add0=add0;
@@ -98,7 +98,7 @@ public class Screen_Data {
         
     }
     //caso especial para pedidos pq requiere diferente formato de valores
-    public Screen_Data(Connection con,String query,ObservableList rowList, int add0,String Updatequery,boolean b) {
+    public Screen_DataArticulos(Connection con,String query,ObservableList rowList, int add0,String Updatequery,boolean b) {
         this.con=con;
         this.query=query;
         this.add0=add0;

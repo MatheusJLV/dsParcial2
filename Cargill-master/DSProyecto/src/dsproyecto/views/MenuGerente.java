@@ -73,7 +73,15 @@ public class MenuGerente {
             Cargar_Scene(new Scene(b.getRoot(),800,400),"Otorgar");
         });
         
+        ManageInventario.setOnAction(e->{
+            PermisosInventario b=new PermisosInventario(con);
+            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosInventario");
+        });
         
+        ManageVentas.setOnAction(e->{
+            PermisosVenta b=new PermisosVenta(con);
+            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+        });
         
     }
     public void Cargar_Scene(Scene scene,String titulo)  {
