@@ -32,19 +32,20 @@ import javafx.util.Callback;
  *
  * @author medin
  */
-public class BuscarUsuarios {
+public class VendedorView {
     Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
     HBox opcional=new HBox();
-    HBox bottom=new HBox(150);
+    HBox bottom=new HBox(80);
     VBox Vb=new VBox(4);
     Button New= new Button(" Agregar ");
     Button Del= new Button("  Borrar ");
     Button Mod= new Button("Modificar");
     Button Menu= new Button(" Regresar");
     Button Buscar= new Button("  Buscar ");
-    
+    Button Cotizar= new Button("  Cotizar ");
+    Button Venta= new Button("  Venta ");
     Label label=new Label("Codigo de Cliente");
     TextField Tfield= new TextField();
     String Viewquery;
@@ -59,7 +60,7 @@ public class BuscarUsuarios {
     
     
 
-    public BuscarUsuarios(Connection con) {
+    public VendedorView(Connection con) {
         this.con = con;
         
      
@@ -70,7 +71,7 @@ public class BuscarUsuarios {
         tableview.setMaxSize(720, 280);
         head.getChildren().addAll(label,Tfield,Buscar,New);
         head.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Mod,Del,Menu);
+        bottom.getChildren().addAll(Cotizar,Venta,Mod,Del,Menu);
         bottom.setAlignment(Pos.CENTER);
         Vb.getChildren().addAll(head,tableview,bottom);
         Vb.setPadding(new Insets(30, 40, 20, 40));
@@ -86,15 +87,20 @@ public class BuscarUsuarios {
         
         
         
-        Viewquery="select * from usuario ";
+        Viewquery="select * from cliente ";
         //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into usuario values (%s,\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\",\"%s\");";
-        Delquery="DELETE FROM usuario\n" +"WHERE id=";
-        
+        Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
+        Delquery="DELETE FROM cliente\n" +"WHERE id=";
+        Modquery="UPDATE cliente SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
         
         
         buildData(Viewquery);
-        
+        Buscar.setOnAction(e->{
+            ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
+            if (rowList!=null){
+                
+            }
+        });
         Del.setOnAction(e->{
            
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
@@ -108,7 +114,13 @@ public class BuscarUsuarios {
             
         });
         
-        
+        Mod.setOnAction(e->{
+            ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
+            if (rowList!=null){
+            Screen_Data  sc=new Screen_Data(con, Viewquery, rowList, 1,Modquery);
+            ShowWindow(new Scene(sc.getRoot()));
+            }
+        });
         
         
         New.setOnAction(e->{
@@ -142,7 +154,7 @@ public class BuscarUsuarios {
         else if (isNumeric(Tfield.getText())) {
                 
             String numC=Tfield.getText();
-            String query = "select * from usuario where usuario.id="+numC;
+            String query = "select * from cliente where cliente.id="+numC;
             
             buildData(query);
             
@@ -255,5 +267,5 @@ public class BuscarUsuarios {
     st.initModality(Modality.WINDOW_MODAL);
     st.initOwner(root.getScene().getWindow() );
     st.show();
-}
+}   
 }

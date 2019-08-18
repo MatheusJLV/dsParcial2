@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Jefe {
     Repartidor SolicitarAbastecimiento(Abastecimiento abastecimiento){
-        return Repartidor.cola.peek();
+        return null;
         
     }
     boolean AsignarEnvio(ArrayList<iTransporte> transportes){

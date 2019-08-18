@@ -18,21 +18,21 @@ public class Envio implements iTransporte{
 
     @Override
     public String getDetalles() {
-        return Id +" "+destino +" "+ venta.toString()+"\n";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getDestino() {
-        return destino;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getOrigen() {
-        return "origen";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ArrayList<Articulo> getCarga() {
-        return new ArrayList<>();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

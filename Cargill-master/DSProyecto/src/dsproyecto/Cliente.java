@@ -14,6 +14,5 @@ import java.util.ArrayList;
 public class Cliente {
     ArrayList<Venta> compras;
     void addCompra(){
-        compras.add(new Venta());
     }
 }

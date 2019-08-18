@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,12 +21,7 @@ ArrayList<iTransporte> entregas;
 void RealizarEntregas(iTransporte transporte){
 
 }
-static void encolarRepartidor(Repartidor rep){
-    cola.add(rep);
-}
-Repartidor sacarRepartidor(){
-    if(!cola.isEmpty())return cola.peek();
-    else return null;
-    
-}
+static void encolarRepartidor(){}
+static void sacarRepartidor(){}
+//METODOS DE ENCOLAMIENTO TOP, POP Y QUEUE
 }

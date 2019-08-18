@@ -111,8 +111,10 @@ public class Login {
     
      public void Cargar_Menu()  {
          MenuP m=new MenuP(con);
+         LoginUsuario l=new LoginUsuario(con);
          Stage st= (Stage)root.getScene().getWindow();
-         st.setScene(new Scene(m.getRoot(), 800, 400));
+         st.setScene(new Scene(l.getRoot(), 400, 400));
+         st.setTitle("User Login");
      
      
      }

@@ -20,26 +20,22 @@ public class Abastecimiento implements iTransporte{
 
     @Override
     public String getDetalles() {
-        String str = destino +" "+ origen+"\n";
-        for(Articulo art : articulos){
-            str+=art.Nombre +" : "+ art.Categoria +" "+ art.Descripcion + "\n";
-        }
-        return str;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getDestino() {
-        return destino+"";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getOrigen() {
-        return origen;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ArrayList<Articulo> getCarga() {
-        return articulos;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
