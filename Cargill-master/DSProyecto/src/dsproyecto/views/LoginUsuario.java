@@ -76,6 +76,9 @@ public class LoginUsuario {
                                 Scene s2= new Scene(b2.getRoot(),800,400);
                                 Cargar_Scene(s2,"Vendedor");
                                 break;
+                            case "Jefe":
+                                JefeView jv = new JefeView(con);
+                                Scene sceneJefe = new Scene(jv.getRoot(),800,400);
 
                     }
                       
