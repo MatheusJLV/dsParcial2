@@ -1,0 +1,1 @@
+base de datos conectada a mysql workbench, proyecto en java ejecutable en netbeans. requiere conectar a la bd (root root y puertos por por defecto)
