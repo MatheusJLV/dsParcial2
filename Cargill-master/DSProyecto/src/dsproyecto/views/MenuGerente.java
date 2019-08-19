@@ -82,6 +82,14 @@ public class MenuGerente {
             PermisosVenta b=new PermisosVenta(con);
             Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
         });
+        ManageEnvios.setOnAction(e->{
+            PermisosEnvios b=new PermisosEnvios(con);
+            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+        });
+        ManagePersonal.setOnAction(e->{
+            PermisosUsuarios b=new PermisosUsuarios(con);
+            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+        });
         
     }
     public void Cargar_Scene(Scene scene,String titulo)  {
