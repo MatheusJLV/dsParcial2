@@ -8,6 +8,7 @@ package dsproyecto.views;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -126,9 +127,9 @@ public class OtorgarPermisos {
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"inventario\" and u.id ="+codigo;
             
             buildData(query); 
-            try {
+            try (ResultSet rs = con.createStatement().executeQuery(query);){
                             //ResultSet
-                ResultSet rs = con.createStatement().executeQuery(query);
+                
                 if (rs.next()){
                 try {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=1 and idUsuario ="+Tfield2.getText());
@@ -161,9 +162,9 @@ public class OtorgarPermisos {
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"Ventas\" and u.id ="+codigo;
             
             buildData(query); 
-            try {
+            try (ResultSet rs = con.createStatement().executeQuery(query);){
                             //ResultSet
-                ResultSet rs = con.createStatement().executeQuery(query);
+                
                 if (rs.next()){
                 try {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=2 and idUsuario ="+Tfield2.getText());
@@ -196,9 +197,9 @@ public class OtorgarPermisos {
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"Envios\" and u.id ="+codigo;
             
             buildData(query); 
-            try {
+            try (ResultSet rs = con.createStatement().executeQuery(query);
+){
                             //ResultSet
-                ResultSet rs = con.createStatement().executeQuery(query);
                 if (rs.next()){
                 try {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=3 and idUsuario ="+Tfield2.getText());
@@ -327,12 +328,12 @@ public class OtorgarPermisos {
     public void buildData(String query) {
         
         data = FXCollections.observableArrayList();
-        try {
+        try (ResultSet rs = con.createStatement().executeQuery(query);){
             
             //SQL FOR SELECTING ALL OF CUSTOMER
             
             //ResultSet
-            ResultSet rs = con.createStatement().executeQuery(query);
+            
 
             /**
              * ********************************
@@ -380,8 +381,8 @@ public class OtorgarPermisos {
         }
     }
     public void ExecuteQuery(String query){
-        try {
-            con.createStatement().execute(query);
+        try (Statement st = con.createStatement();){
+            st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
             System.out.println("Error in SQL code: "+ex.getMessage());

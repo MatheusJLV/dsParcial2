@@ -8,6 +8,7 @@ package dsproyecto.views;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -177,12 +178,12 @@ public class BuscarUsuarios {
     public void buildData(String query) {
         
         data = FXCollections.observableArrayList();
-        try {
+        try (ResultSet rs = con.createStatement().executeQuery(query)){
             
             //SQL FOR SELECTING ALL OF CUSTOMER
             
             //ResultSet
-            ResultSet rs = con.createStatement().executeQuery(query);
+            
 
             /**
              * ********************************
@@ -230,8 +231,8 @@ public class BuscarUsuarios {
         }
     }
     public void ExecuteQuery(String query){
-        try {
-            con.createStatement().execute(query);
+        try (Statement st = con.createStatement();){
+            st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
             System.out.println("Error in SQL code: "+ex.getMessage());

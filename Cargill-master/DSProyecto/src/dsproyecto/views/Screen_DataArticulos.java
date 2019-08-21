@@ -8,6 +8,7 @@ package dsproyecto.views;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -204,9 +205,11 @@ public class Screen_DataArticulos {
     }
     public void SetValues(){
         
-        try {
+        try (ResultSet rs = con.createStatement().executeQuery(this.query);
+                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+l1.getText()+" = "+rowList.get(0));
+){
             
-            ResultSet rs = con.createStatement().executeQuery(this.query);
+            
             
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                 final int j = i;
@@ -217,7 +220,6 @@ public class Screen_DataArticulos {
             }
             if(add0==1){
                 //System.out.println(this.query+" where "+l1.getText()+" = "+rowList.get(0));
-                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+l1.getText()+" = "+rowList.get(0));
                 while (rs2.next()) {
                     //Iterate Row
 
@@ -238,8 +240,8 @@ public class Screen_DataArticulos {
     }
     
       public void ExecuteQuery(String query){
-        try {
-            con.createStatement().executeUpdate(query);
+        try (Statement st = con.createStatement();){
+            st.executeUpdate(query);
             
         } catch (SQLException ex) {
             System.out.println("Error in SQL code: "+ex.getMessage());
