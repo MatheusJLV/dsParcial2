@@ -24,20 +24,13 @@ import javafx.stage.Stage;
  * @author medin
  */
 public class Login {
-//    Menu Menu;
-    
+
     private static Connection con;
-    // Declaramos los datos de conexion a la bd
     private static final String driver="com.mysql.jdbc.Driver";
     private static final String user="root";
     private static final String pass="root";
     private static final String url="jdbc:mysql://localhost:3306/disenosoft ?useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&allowMultiQueries=TRUE";
-    //192.168.56.102
-    //remover permisos de modificar o borrar datos de la base de datos
-    //"jdbc:mysql://localhost:3306/proyecto"
-    //+ "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false"
-    
-    //url="jdbc:mysql://localhost:3306/proyecto"
+   
     HBox Hb1 = new HBox(20);
     HBox Hb2 = new HBox(20);
     HBox Hb3 = new HBox(20);
@@ -81,20 +74,21 @@ public class Login {
         
         
     }
-    public void conectar()  {
-        // Reseteamos a null la conexion a la bd
+    public  void conectar()  {
         con=null;
         try{
             Class.forName(driver);
-            // Nos conectamos a la bd
+           
             con= (Connection) DriverManager.getConnection(url, t1.getText(), t2.getText());
-            // Si la conexion fue exitosa mostramos un mensaje de conexion exitosa
+          
             if (con!=null){
                T_Estado.setText("Conexion establecida");
-               Cargar_Menu();
+               LoginUsuario l=new LoginUsuario(con);
+                 Stage st= (Stage)root.getScene().getWindow();
+                 st.setScene(new Scene(l.getRoot(), 400, 400));
+                 st.setTitle("User Login");
             }
         }
-        // Si la conexion NO fue exitosa mostramos un mensaje de error
         catch (ClassNotFoundException | SQLException e){
             T_Estado.setText("Error de conexion: " + e.getMessage());
         }
@@ -109,14 +103,6 @@ public class Login {
     }
 
     
-     public void Cargar_Menu()  {
-         MenuP m=new MenuP(con);
-         LoginUsuario l=new LoginUsuario(con);
-         Stage st= (Stage)root.getScene().getWindow();
-         st.setScene(new Scene(l.getRoot(), 400, 400));
-         st.setTitle("User Login");
-     
-     
-     }
+    
 
 }
