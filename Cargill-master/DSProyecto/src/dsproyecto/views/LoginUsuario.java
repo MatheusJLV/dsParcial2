@@ -46,7 +46,7 @@ public class LoginUsuario {
 
     public LoginUsuario(Connection cone) {
         con = cone;
-        Build();
+        build();
         
         Conect.setOnAction(e->{
             try ( ResultSet rs = con.createStatement().executeQuery("select cargo from usuario where username=\""+txt1.getText()+"\" and userpa"+"ssw"+"ord=\""+txt2.getText()+"\";");
@@ -68,13 +68,13 @@ public class LoginUsuario {
                                 
                                 VendedorView b=new VendedorView(con);
                                 Scene s= new Scene(b.getRoot(),800,400);
-                                Cargar_Scene(s);
+                                cargarScene(s);
                                 break;
                             case "Gerente":
                                 
                                 menuGerente b2=new menuGerente(con);
                                 Scene s2= new Scene(b2.getRoot(),800,400);
-                                Cargar_Scene(s2);
+                                cargarScene(s2);
                                 break;
                             case "Jefe":
                                 JefeView jv = new JefeView(con);
@@ -101,7 +101,7 @@ public class LoginUsuario {
     
     
     
-    public void Build(){
+    public void build(){
         hb1.getChildren().addAll(iuser,txt1);
         hb2.getChildren().addAll(ipass,txt2);
         iuser.setMinSize(70, 20);
@@ -130,7 +130,7 @@ public class LoginUsuario {
     public void setRoot(Pane root) {
         this.root = root;
     }
-    public void Cargar_Scene(Scene scene)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

@@ -119,7 +119,7 @@ public class VendedorView {
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
             Screen_Data  sc=new Screen_Data(con, viewquery, rowList, 1,modquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            showWindow(new Scene(sc.getRoot()));
             }
         });
         
@@ -128,7 +128,7 @@ public class VendedorView {
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
              
             Screen_Data  sc=new Screen_Data(con,viewquery, rowList, 0,addquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            showWindow(new Scene(sc.getRoot()));
              
             
         });
@@ -257,7 +257,7 @@ public class VendedorView {
      
      
      }
-    private void ShowWindow(Scene scene) {
+    private void showWindow(Scene scene) {
     
     Stage st= new Stage();
     st.setScene(scene);

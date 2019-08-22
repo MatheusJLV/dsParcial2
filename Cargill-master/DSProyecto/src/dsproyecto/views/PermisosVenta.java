@@ -39,15 +39,15 @@ public class PermisosVenta {
     HBox head=new HBox(50);
     HBox opcional=new HBox();
     HBox bottom=new HBox(80);
-    VBox Vb=new VBox(4);
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button(" Buscar Vendedor");
-    Button Buscar2= new Button(" Buscar Cliente");
+    VBox vertBox=new VBox(4);
+    Button menu= new Button(" Regresar");
+    Button buscar= new Button(" Buscar Vendedor");
+    Button buscar2= new Button(" Buscar Cliente");
     Label label=new Label("Busqueda de Venta:");
     TextField Tfield= new TextField();
 
-    String Viewquery;
-    String Delquery;
+    String viewquery;
+    String delquery;
     
     
     private ObservableList<ObservableList> data;
@@ -67,14 +67,14 @@ public class PermisosVenta {
         tableview.setMaxSize(720, 200);
         head.getChildren().addAll(label,Tfield);
         head.setAlignment(Pos.CENTER);
-        opcional.getChildren().addAll(Buscar,Buscar2);
+        opcional.getChildren().addAll(buscar,buscar2);
         opcional.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Menu);
+        bottom.getChildren().addAll(menu);
         bottom.setAlignment(Pos.CENTER);
-        Vb.getChildren().addAll(head,opcional,tableview,bottom);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        vertBox.getChildren().addAll(head,opcional,tableview,bottom);
+        vertBox.setPadding(new Insets(30, 40, 20, 40));
+        vertBox.setAlignment(Pos.CENTER);
+        root.getChildren().add(vertBox);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -85,13 +85,13 @@ public class PermisosVenta {
         
         
         
-        Viewquery="select u.nombre as vendedor, c.nombre as cliente, v.fecha, sum(d.cantidad*d.precio) as total from usuario u,venta v ,detalleventa d,cliente c where v.idCliente= c.id and v.idVendedor=u.id and d.idventa=v.id group by v.id";
+        viewquery="select u.nombre as vendedor, c.nombre as cliente, v.fecha, sum(d.cantidad*d.precio) as total from usuario u,venta v ,detalleventa d,cliente c where v.idCliente= c.id and v.idVendedor=u.id and d.idventa=v.id group by v.id";
         //                                   %s para int     \"%s\"   para varchar
-        Delquery="DELETE FROM cliente\n" +"WHERE id=";
+        delquery="DELETE FROM cliente\n" +"WHERE id=";
         
         
-        buildData(Viewquery);
-        Buscar.setOnAction(e->{
+        buildData(viewquery);
+        buscar.setOnAction(e->{
             if (Tfield.getText().isEmpty()) {tableview.getColumns().clear();}
         else {
                 
@@ -104,12 +104,12 @@ public class PermisosVenta {
         });
 
 
-        Menu.setOnAction(e->{
+        menu.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400));
+        cargarScene(new Scene(m.getRoot(), 800, 400));
         });
 
-        Buscar2.setOnAction(e->  {
+        buscar2.setOnAction(e->  {
             if (Tfield.getText().isEmpty()) {tableview.getColumns().clear();}
         else {
                 
@@ -143,7 +143,7 @@ public class PermisosVenta {
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -220,17 +220,17 @@ public class PermisosVenta {
             System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

@@ -21,7 +21,9 @@ import javafx.stage.Stage;
  */
 public class MenuP {
     Connection con;
-    VBox Col1=new VBox(20),Col2=new VBox(20),Col3=new VBox();
+    VBox Col1=new VBox(20);
+    VBox Col2=new VBox(20);
+    VBox Col3=new VBox();
     
     
     Button Usuarios=new Button("Usuario"),Cotizacion=new Button("Cotizacion"),Venta=new Button("Venta"),Productos=new Button("Producto");
@@ -60,13 +62,13 @@ public class MenuP {
         
         Usuarios.setOnAction(e->{
             buscarUsuarios b=new buscarUsuarios(con);
-            Cargar_Scene(new Scene(b.getRoot(),800,400));
+            cargarScene(new Scene(b.getRoot(),800,400));
         });
         
         
         
     }
-    public void Cargar_Scene(Scene scene)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

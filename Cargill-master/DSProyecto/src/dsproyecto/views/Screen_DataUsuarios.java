@@ -27,17 +27,26 @@ import javafx.stage.Stage;
  */
 public class Screen_DataUsuarios {
     Label lbl1=new Label();
-    Label l2=new Label();
-    Label l3=new Label();
-    Label l4=new Label();
-    Label l5=new Label();
-    Label l6=new Label();
-    Label l7=new Label();
-    Label l8=new Label();
-    Label l9=new Label();
-            Label l10=new Label();
-            Label l11=new Label("");
-    TextField txt1=new TextField(),t2=new TextField(),t3=new TextField(),t4=new TextField(),t5=new TextField(),t6=new TextField(),t7=new TextField(),t8=new TextField(),t9=new TextField(),t10=new TextField();
+    Label lbl2=new Label();
+    Label lbl3=new Label();
+    Label lbl4=new Label();
+    Label lbl5=new Label();
+    Label lbl6=new Label();
+    Label lbl7=new Label();
+    Label lbl8=new Label();
+    Label lbl9=new Label();
+            Label lbl10=new Label();
+            Label lbl11=new Label("");
+    TextField texto1=new TextField();
+    TextField texto2=new TextField();
+    TextField texto3=new TextField();
+    TextField texto4=new TextField();
+    TextField texto5=new TextField();
+    TextField texto6=new TextField();
+    TextField texto7=new TextField();
+    TextField texto8=new TextField();
+    TextField texto9=new TextField();
+    TextField texto10=new TextField();
     Button btn1= new Button("Done");
     Pane root = new Pane();
     HBox fila1=new HBox(10);
@@ -68,8 +77,8 @@ public class Screen_DataUsuarios {
         this.Udatequery=Updatequery;
         this.rowList=rowList;
         
-        list1.add(lbl1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(txt1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(lbl1);list1.add(lbl2);list1.add(lbl3);list1.add(lbl4);list1.add(lbl5);list1.add(lbl6);list1.add(lbl7);list1.add(lbl8);list1.add(lbl9);list1.add(lbl10);
+        list2.add(texto1);list2.add(texto2);list2.add(texto3);list2.add(texto4);list2.add(texto5);list2.add(texto6);list2.add(texto7);list2.add(texto8);list2.add(texto9);list2.add(texto10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -85,12 +94,12 @@ public class Screen_DataUsuarios {
             getData();
             try {
                 if(this.add0==1){
-                                    executeQuery("UPDATE Usuario SET nombre=\""+t2.getText()+"\", telefono="+t3.getText()+"\", direccion= \""+t4.getText()+"\", mail= \""+t5.getText()+"\", username= \""+t6.getText()+"\", userpassword= \""+t7.getText()+"\", cargo= \""+t8.getText()+" WHERE id="+txt1.getText());
+                                    executeQuery("UPDATE Usuario SET nombre=\""+texto2.getText()+"\", telefono="+texto3.getText()+"\", direccion= \""+texto4.getText()+"\", mail= \""+texto5.getText()+"\", username= \""+texto6.getText()+"\", userpassword= \""+texto7.getText()+"\", cargo= \""+texto8.getText()+" WHERE id="+texto1.getText());
 
                 } else{
                                     con.createStatement().execute("Insert into Usuario values("
-                                            +txt1.getText()+",\""+t2.getText()+"\","+t3.getText()+",\""+t4.getText()+"\",\""+t5.getText()+"\", \""
-                                            +t6.getText()+"\",\""+t7.getText()+"\",\""+t8.getText()+"\"");
+                                            +texto1.getText()+",\""+texto2.getText()+"\","+texto3.getText()+",\""+texto4.getText()+"\",\""+texto5.getText()+"\", \""
+                                            +texto6.getText()+"\",\""+texto7.getText()+"\",\""+texto8.getText()+"\"");
 
                 }
 
@@ -113,8 +122,8 @@ public class Screen_DataUsuarios {
         this.rowList=rowList;
         this.Pedido=b;
         
-        list1.add(lbl1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(txt1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(lbl1);list1.add(lbl2);list1.add(lbl3);list1.add(lbl4);list1.add(lbl5);list1.add(lbl6);list1.add(lbl7);list1.add(lbl8);list1.add(lbl9);list1.add(lbl10);
+        list2.add(texto1);list2.add(texto2);list2.add(texto3);list2.add(texto4);list2.add(texto5);list2.add(texto6);list2.add(texto7);list2.add(texto8);list2.add(texto9);list2.add(texto10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -187,12 +196,12 @@ public class Screen_DataUsuarios {
     
     public void build(){
     
-    fila1.getChildren().addAll(lbl1,txt1,l2,t2);
-    fila2.getChildren().addAll(l3,t3,l4,t4);
-    fila3.getChildren().addAll(l5,t5,l6,t6);
-    fila4.getChildren().addAll(l7,t7,l8,t8);
-    fila6.getChildren().addAll(l9,t9,l10,t10);
-    contenedor1.getChildren().addAll(fila1,fila2,fila3,fila4,fila6,l11,btn1);
+    fila1.getChildren().addAll(lbl1,texto1,lbl2,texto2);
+    fila2.getChildren().addAll(lbl3,texto3,lbl4,texto4);
+    fila3.getChildren().addAll(lbl5,texto5,lbl6,texto6);
+    fila4.getChildren().addAll(lbl7,texto7,lbl8,texto8);
+    fila6.getChildren().addAll(lbl9,texto9,lbl10,texto10);
+    contenedor1.getChildren().addAll(fila1,fila2,fila3,fila4,fila6,lbl11,btn1);
     //c1.setMinSize(320, 400);
     contenedor1.setPadding(new Insets(20, 20, 20, 20));
     contenedor1.setAlignment(Pos.CENTER);

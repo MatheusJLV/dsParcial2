@@ -26,16 +26,35 @@ import javafx.stage.Stage;
  * @author medin
  */
 public class Screen_DataArticulos {
-    Label l1=new Label(),l2=new Label(),l3=new Label(),l4=new Label(),l5=new Label(),l6=new Label(),l7=new Label(),l8=new Label(),l9=new Label(),l10=new Label(),l11=new Label("");
-    TextField t1=new TextField(),t2=new TextField(),t3=new TextField(),t4=new TextField(),t5=new TextField(),t6=new TextField(),t7=new TextField(),t8=new TextField(),t9=new TextField(),t10=new TextField();
-    Button bt= new Button("Done");
+    Label label1=new Label();
+    Label label2=new Label();
+    Label label3=new Label();
+    Label label4=new Label();
+    Label label5=new Label();
+    Label label6=new Label();
+    Label label7=new Label();
+    Label label8=new Label();
+            Label label9=new Label();
+    Label label10=new Label();
+    Label label11=new Label("");
+    TextField tbox1=new TextField();
+    TextField tbox2=new TextField();
+    TextField tbox3=new TextField();
+    TextField tbox4=new TextField();
+    TextField tbox5=new TextField(); 
+     TextField tbox6=new TextField();
+    TextField tbox7=new TextField();
+    TextField tbox8=new TextField();
+    TextField tbox9=new TextField();
+    TextField tbox10=new TextField();
+    Button btn= new Button("Done");
     Pane root = new Pane();
-    HBox f1=new HBox(10);
-    HBox f2=new HBox(10);
-    HBox f3=new HBox(10);
-    HBox f4=new HBox(10);
-    HBox f5=new HBox(10);
-    VBox c1= new VBox(20);
+    HBox fila1=new HBox(10);
+    HBox fila2=new HBox(10);
+    HBox fila3=new HBox(10);
+    HBox fila4=new HBox(10);
+    HBox fila5=new HBox(10);
+    VBox columna= new VBox(20);
     ArrayList<Label> list1 =new ArrayList();
     ArrayList<TextField> list2 =new ArrayList();
     ArrayList<String> data =new ArrayList();
@@ -58,8 +77,8 @@ public class Screen_DataArticulos {
         this.Udatequery=Updatequery;
         this.rowList=rowList;
         
-        list1.add(l1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(t1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(label1);list1.add(label2);list1.add(label3);list1.add(label4);list1.add(label5);list1.add(label6);list1.add(label7);list1.add(label8);list1.add(label9);list1.add(label10);
+        list2.add(tbox1);list2.add(tbox2);list2.add(tbox3);list2.add(tbox4);list2.add(tbox5);list2.add(tbox6);list2.add(tbox7);list2.add(tbox8);list2.add(tbox9);list2.add(tbox10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -68,18 +87,18 @@ public class Screen_DataArticulos {
             t.setMinSize(70, 30);
             t.setDisable(true);
         }
-        Build();
-        SetValues();
+        build();
+        setValues();
         
-        bt.setOnAction(e->{
+        btn.setOnAction(e->{
             getData();
             try {
-                ExecuteQuery("UPDATE articulo SET nombre=\""+t2.getText()+"\", descripcion= \""+t3.getText()+"\", preciobase="+t4.getText()+" WHERE id="+t1.getText());
+                executeQuery("UPDATE articulo SET nombre=\""+tbox2.getText()+"\", descripcion= \""+tbox3.getText()+"\", preciobase="+tbox4.getText()+" WHERE id="+tbox1.getText());
 
                 
             } catch (Exception r) {
                 System.out.println("Error con datos: "+ r.getMessage());
-            }Stage s=((Stage) bt.getScene().getWindow());
+            }Stage s=((Stage) btn.getScene().getWindow());
             s.close();
             
             
@@ -95,8 +114,8 @@ public class Screen_DataArticulos {
         this.rowList=rowList;
         this.Pedido=b;
         
-        list1.add(l1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(t1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(label1);list1.add(label2);list1.add(label3);list1.add(label4);list1.add(label5);list1.add(label6);list1.add(label7);list1.add(label8);list1.add(label9);list1.add(label10);
+        list2.add(tbox1);list2.add(tbox2);list2.add(tbox3);list2.add(tbox4);list2.add(tbox5);list2.add(tbox6);list2.add(tbox7);list2.add(tbox8);list2.add(tbox9);list2.add(tbox10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -105,10 +124,10 @@ public class Screen_DataArticulos {
             t.setMinSize(70, 30);
             t.setDisable(true);
         }
-        Build();
-        SetValues();
+        build();
+        setValues();
         
-        bt.setOnAction(e->{
+        btn.setOnAction(e->{
             getData();
             try {
                 if(add0==1){
@@ -121,18 +140,18 @@ public class Screen_DataArticulos {
                     data.clear();data.addAll(subdata2);data.addAll(subdata1);
                     String str=String.format(Updatequery, data.toArray());
                     
-                    ExecuteQuery(str);
+                    executeQuery(str);
                     System.out.println(str);
                 }else{
                     String str=String.format(Updatequery,data.toArray());
                     System.out.println(str);
-                    ExecuteQuery(str);
+                    executeQuery(str);
                 }
                 
                 
             } catch (Exception r) {
                 System.err.println("Error con datos: "+ r.getMessage());
-            }Stage s=((Stage) bt.getScene().getWindow());
+            }Stage s=((Stage) btn.getScene().getWindow());
             s.close();
             
             
@@ -167,17 +186,17 @@ public class Screen_DataArticulos {
     
     
     
-    public void Build(){
+    public void build(){
     
-    f1.getChildren().addAll(l1,t1,l2,t2);
-    f2.getChildren().addAll(l3,t3,l4,t4);
-    f3.getChildren().addAll(l5,t5,l6,t6);
-    f4.getChildren().addAll(l7,t7,l8,t8);
-    f5.getChildren().addAll(l9,t9,l10,t10);
-    c1.getChildren().addAll(f1,f2,f3,f4,f5,l11,bt);
-    c1.setPadding(new Insets(20, 20, 20, 20));
-    c1.setAlignment(Pos.CENTER);
-    root.getChildren().add(c1);
+    fila1.getChildren().addAll(label1,tbox1,label2,tbox2);
+    fila2.getChildren().addAll(label3,tbox3,label4,tbox4);
+    fila3.getChildren().addAll(label5,tbox5,label6,tbox6);
+    fila4.getChildren().addAll(label7,tbox7,label8,tbox8);
+    fila5.getChildren().addAll(label9,tbox9,label10,tbox10);
+    columna.getChildren().addAll(fila1,fila2,fila3,fila4,fila5,label11,btn);
+    columna.setPadding(new Insets(20, 20, 20, 20));
+    columna.setAlignment(Pos.CENTER);
+    root.getChildren().add(columna);
     
 
     
@@ -187,10 +206,10 @@ public class Screen_DataArticulos {
     public Pane getRoot() {
         return root;
     }
-    public void SetValues(){
+    public void setValues(){
         
         try (ResultSet rs = con.createStatement().executeQuery(this.query);
-                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+l1.getText()+" = "+rowList.get(0));
+                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+label1.getText()+" = "+rowList.get(0));
 ){
             
             
@@ -223,7 +242,7 @@ public class Screen_DataArticulos {
         
     }
     
-      public void ExecuteQuery(String query){
+      public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.executeUpdate(query);
             

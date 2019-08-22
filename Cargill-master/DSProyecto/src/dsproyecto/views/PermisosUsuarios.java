@@ -40,22 +40,22 @@ Connection con;
     HBox head=new HBox(50);
     HBox opcional=new HBox();
     HBox bottom=new HBox(80);
-    VBox Vb=new VBox(4);
-    Button New= new Button(" Agregar ");
-    Button Del= new Button("  Borrar ");
-    Button Mod= new Button("Modificar");
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button(" Buscar Nombre");
-    Button Buscar2= new Button(" Buscar cargo");
-    Button Buscar3= new Button(" Buscar Lugar");
+    VBox contenedor=new VBox(4);
+    Button btnnew= new Button(" Agregar ");
+    Button btndel= new Button("  Borrar ");
+    Button btnmod= new Button("Modificar");
+    Button menu= new Button(" Regresar");
+    Button buscar= new Button(" Buscar Nombre");
+    Button buscar2= new Button(" Buscar cargo");
+    Button buscar3= new Button(" Buscar Lugar");
     Label label=new Label("Busqueda de Producto:");
     Label label2=new Label("Codigo de Producto:");
-    TextField Tfield= new TextField();
-    TextField Tfield2= new TextField();
-    String Viewquery;
-    String Addquery;
-    String Delquery;
-    String Modquery;
+    TextField field= new TextField();
+    TextField field2= new TextField();
+    String viewquery;
+    String addquery;
+    String delquery;
+    String modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -73,16 +73,16 @@ Connection con;
         
         tableview.setMinSize(720, 200);
         tableview.setMaxSize(720, 200);
-        head.getChildren().addAll(label,Tfield,New);
+        head.getChildren().addAll(label,field,btnnew);
         head.setAlignment(Pos.CENTER);
-        opcional.getChildren().addAll(Buscar,Buscar2);
+        opcional.getChildren().addAll(buscar,buscar2);
         opcional.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Mod,Menu);
+        bottom.getChildren().addAll(btnmod,menu);
         bottom.setAlignment(Pos.CENTER);
-        Vb.getChildren().addAll(head,opcional,tableview,bottom);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        contenedor.getChildren().addAll(head,opcional,tableview,bottom);
+        contenedor.setPadding(new Insets(30, 40, 20, 40));
+        contenedor.setAlignment(Pos.CENTER);
+        root.getChildren().add(contenedor);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -93,53 +93,53 @@ Connection con;
         
         
         
-        Viewquery="select * from Usuario ";
+        viewquery="select * from Usuario ";
         //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
-        Delquery="DELETE FROM cliente\n" +"WHERE id=";
+        addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
+        delquery="DELETE FROM cliente\n" +"WHERE id=";
         
         
-        buildData(Viewquery);
+        buildData(viewquery);
         
         
         
-        Mod.setOnAction(e->{
+        btnmod.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
-            Screen_DataUsuarios  sc=new Screen_DataUsuarios(con, Viewquery, rowList, 1,Modquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            Screen_DataUsuarios  sc=new Screen_DataUsuarios(con, viewquery, rowList, 1,modquery);
+            showWindow(new Scene(sc.getRoot()));
             }
         });
         
         
-        New.setOnAction(e->{
+        btnnew.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
              
-            Screen_DataUsuarios  sc=new Screen_DataUsuarios(con,Viewquery, rowList, 0,Addquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            Screen_DataUsuarios  sc=new Screen_DataUsuarios(con,viewquery, rowList, 0,addquery);
+            showWindow(new Scene(sc.getRoot()));
              
             
         });
-        Menu.setOnAction(e->{
+        menu.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400));
+        cargarScene(new Scene(m.getRoot(), 800, 400));
         });
-        Buscar.setOnAction(e->  {
-             if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+        buscar.setOnAction(e->  {
+             if (field.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String nombre=Tfield.getText();
+            String nombre=field.getText();
             String query = "select * from Usuario where nombre like  \"%"+nombre+"%\"";
             
             buildData(query);
             
         }
         });
-        Buscar2.setOnAction(e->  {
-            if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+        buscar2.setOnAction(e->  {
+            if (field.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String cargo=Tfield.getText();
+            String cargo=field.getText();
             String query = "select * from Usuario where cargo like  \"%"+cargo+"%\"";
             
             buildData(query);
@@ -156,11 +156,11 @@ Connection con;
         this.root = root;
     }
    
-    public void BuscarEvent(){
-        if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+    public void buscarEvent(){
+        if (field.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String nombre=Tfield.getText();
+            String nombre=field.getText();
             String query = "select * from Articulo where nombre like  \"%"+nombre+"%\"";
             
             buildData(query);
@@ -169,7 +169,7 @@ Connection con;
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -240,17 +240,17 @@ Connection con;
             System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          
@@ -258,7 +258,7 @@ Connection con;
      
      
      }
-    private void ShowWindow(Scene scene) {
+    private void showWindow(Scene scene) {
     
     Stage st= new Stage();
     st.setScene(scene);

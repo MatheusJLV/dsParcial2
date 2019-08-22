@@ -39,18 +39,18 @@ public class PermisosEnvios {
     HBox head=new HBox(50);
     HBox opcional=new HBox();
     HBox bottom=new HBox(80);
-    VBox Vb=new VBox(4);
-    Button New= new Button(" Agregar ");
-    Button Mod= new Button("Modificar");
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button(" Buscar Repartidor");
-    Button Buscar2= new Button(" Buscar Jefe");
+    VBox vbox1=new VBox(4);
+    Button nuevo= new Button(" Agregar ");
+    Button modificar= new Button("Modificar");
+    Button menu= new Button(" Regresar");
+    Button busqueda= new Button(" Buscar Repartidor");
+    Button busqueda2= new Button(" Buscar Jefe");
     Label label=new Label("Busqueda de Envio:");
-    TextField Tfield= new TextField();
-    String Viewquery;
-    String Addquery;
-    String Delquery;
-    String Modquery;
+    TextField textofield= new TextField();
+    String viewquery;
+    String addquery;
+    String delquery;
+    String modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -68,16 +68,16 @@ public class PermisosEnvios {
         
         tableview.setMinSize(720, 200);
         tableview.setMaxSize(720, 200);
-        head.getChildren().addAll(label,Tfield,New);
+        head.getChildren().addAll(label,textofield,nuevo);
         head.setAlignment(Pos.CENTER);
-        opcional.getChildren().addAll(Buscar,Buscar2);
+        opcional.getChildren().addAll(busqueda,busqueda2);
         opcional.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Mod,Menu);
+        bottom.getChildren().addAll(modificar,menu);
         bottom.setAlignment(Pos.CENTER);
-        Vb.getChildren().addAll(head,opcional,tableview,bottom);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        vbox1.getChildren().addAll(head,opcional,tableview,bottom);
+        vbox1.setPadding(new Insets(30, 40, 20, 40));
+        vbox1.setAlignment(Pos.CENTER);
+        root.getChildren().add(vbox1);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -88,10 +88,10 @@ public class PermisosEnvios {
         
         
         
-        Viewquery="select j.nombre as Jefe, r.nombre as Repartidor, e.estado, e.detalles, l.direccion, e.id from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id";
+        viewquery="select j.nombre as Jefe, r.nombre as Repartidor, e.estado, e.detalles, l.direccion, e.id from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id";
                
-        buildData(Viewquery);
-        Buscar.setOnAction(e->{
+        buildData(viewquery);
+        busqueda.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
                 
@@ -99,43 +99,43 @@ public class PermisosEnvios {
         });
 
         
-        Mod.setOnAction(e->{
+        modificar.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
-            Screen_DataEnvio  sc=new Screen_DataEnvio(con, "select e.estado, e.id from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id", rowList, 1,Modquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            Screen_DataEnvio  sc=new Screen_DataEnvio(con, "select e.estado, e.id from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id", rowList, 1,modquery);
+            showWindow(new Scene(sc.getRoot()));
             }
         });
         
         
-        New.setOnAction(e->{
+        nuevo.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
              
-            Screen_Data  sc=new Screen_Data(con,Viewquery, rowList, 0,Addquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            Screen_Data  sc=new Screen_Data(con,viewquery, rowList, 0,addquery);
+            showWindow(new Scene(sc.getRoot()));
              
             
         });
-        Menu.setOnAction(e->{
+        menu.setOnAction(e->{
             MenuP m= new MenuP(con);
         Cargar_Scene(new Scene(m.getRoot(), 800, 400));
         });
-        Buscar.setOnAction(e->  {
-             if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+        busqueda.setOnAction(e->  {
+             if (textofield.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String nombre=Tfield.getText();
+            String nombre=textofield.getText();
             String query = "select j.nombre as Jefe, r.nombre as Repartidor, e.estado, e.detalles, l.direccion from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id and r.nombre like  \"%"+nombre+"%\"";
             
             buildData(query);
             
         }
         });
-        Buscar2.setOnAction(e->  {
-            if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+        busqueda2.setOnAction(e->  {
+            if (textofield.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String nombre=Tfield.getText();
+            String nombre=textofield.getText();
             String query = "select j.nombre as Jefe, r.nombre as Repartidor, e.estado, e.detalles, l.direccion from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id and j.nombre like  \"%"+nombre+"%\"";
             
             buildData(query);
@@ -152,11 +152,11 @@ public class PermisosEnvios {
         this.root = root;
     }
    
-    public void BuscarEvent(){
-        if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+    public void buscarEvent(){
+        if (textofield.getText().isEmpty()) {buildData(this.viewquery);}
         else {
                 
-            String nombre=Tfield.getText();
+            String nombre=textofield.getText();
             String query = "select * from Articulo where nombre like  \"%"+nombre+"%\"";
             
             buildData(query);
@@ -165,7 +165,7 @@ public class PermisosEnvios {
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -239,10 +239,10 @@ public class PermisosEnvios {
             System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.err.println("Error in SQL code: "+ex.getMessage());
         }
@@ -257,7 +257,7 @@ public class PermisosEnvios {
      
      
      }
-    private void ShowWindow(Scene scene) {
+    private void showWindow(Scene scene) {
     
     Stage st= new Stage();
     st.setScene(scene);

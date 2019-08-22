@@ -39,23 +39,23 @@ public class OtorgarPermisos {
     HBox head=new HBox(50);
     HBox bottom2=new HBox();
     HBox bottom=new HBox(150);
-    VBox Vb=new VBox(4);
-    Button Enlistar= new Button(" Enlistar Todos ");
+    VBox vertical=new VBox(4);
+    Button enlistar= new Button(" Enlistar Todos ");
     Button inventario= new Button("  Inventario ");
     Button ventas= new Button(" Ventas");
     Button envios= new Button("  envios ");
     Button personal= new Button(" personal");
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button("  Buscar ");
+    Button regresar= new Button(" Regresar");
+    Button buscar= new Button("  Buscar ");
     Label label=new Label("Nombre del Usuario: ");
-    TextField Tfield= new TextField();
+    TextField lblfield= new TextField();
     Label label2=new Label("Codigo del Usuario: ");
-    TextField Tfield2= new TextField();
+    TextField lblfield2= new TextField();
     Label label3=new Label("Modificar permisos");
-    String Viewquery;
-    String Addquery;
-    String Delquery;
-    String Modquery;
+    String viewquery;
+    String addquery;
+    String delquery;
+    String modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -73,19 +73,19 @@ public class OtorgarPermisos {
         tableview.setMinSize(720, 250);
         tableview.setMaxSize(720, 250);
         
-        head.getChildren().addAll(label,Tfield,Buscar,Enlistar);
+        head.getChildren().addAll(label,lblfield,buscar,enlistar);
         head.setAlignment(Pos.CENTER);
         
-        bottom.getChildren().addAll(label2,Tfield2,Menu);
+        bottom.getChildren().addAll(label2,lblfield2,regresar);
         bottom.setAlignment(Pos.CENTER);
         
         bottom2.getChildren().addAll(label3,inventario,ventas,envios,personal);
         bottom2.setAlignment(Pos.CENTER);
         
-        Vb.getChildren().addAll(head,tableview,bottom,bottom2);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        vertical.getChildren().addAll(head,tableview,bottom,bottom2);
+        vertical.setPadding(new Insets(30, 40, 20, 40));
+        vertical.setAlignment(Pos.CENTER);
+        root.getChildren().add(vertical);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -94,13 +94,13 @@ public class OtorgarPermisos {
         
 
         
-        Viewquery="select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso";
+        viewquery="select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso";
 
         
         inventario.setOnAction(e->{
-           if(isNumeric(Tfield2.getText())){
+           if(isNumeric(lblfield2.getText())){
     
-            String codigo=Tfield2.getText();
+            String codigo=lblfield2.getText();
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"inventario\" and u.id ="+codigo;
             
             buildData(query); 
@@ -109,15 +109,15 @@ public class OtorgarPermisos {
                 
                 if (rs.next()){
                 try {
-                    con.createStatement().execute("delete from tablapermiso where idPermiso=1 and idUsuario ="+Tfield2.getText());
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("delete from tablapermiso where idPermiso=1 and idUsuario ="+lblfield2.getText());
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
-                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(1,"+Tfield2.getText()+")");
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(1,"+lblfield2.getText()+")");
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
@@ -133,9 +133,9 @@ public class OtorgarPermisos {
         });
         
         ventas.setOnAction(e->{
-           if(isNumeric(Tfield2.getText())){
+           if(isNumeric(lblfield2.getText())){
     
-            String codigo=Tfield2.getText();
+            String codigo=lblfield2.getText();
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"Ventas\" and u.id ="+codigo;
             
             buildData(query); 
@@ -143,15 +143,15 @@ public class OtorgarPermisos {
                 
                 if (rs.next()){
                 try {
-                    con.createStatement().execute("delete from tablapermiso where idPermiso=2 and idUsuario ="+Tfield2.getText());
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("delete from tablapermiso where idPermiso=2 and idUsuario ="+lblfield2.getText());
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
-                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(2,"+Tfield2.getText()+")");
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(2,"+lblfield2.getText()+")");
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
@@ -167,9 +167,9 @@ public class OtorgarPermisos {
         });
         
         envios.setOnAction(e->{
-           if(isNumeric(Tfield2.getText())){
+           if(isNumeric(lblfield2.getText())){
     
-            String codigo=Tfield2.getText();
+            String codigo=lblfield2.getText();
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"Envios\" and u.id ="+codigo;
             
             buildData(query); 
@@ -178,15 +178,15 @@ public class OtorgarPermisos {
                             //ResultSet
                 if (rs.next()){
                 try {
-                    con.createStatement().execute("delete from tablapermiso where idPermiso=3 and idUsuario ="+Tfield2.getText());
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("delete from tablapermiso where idPermiso=3 and idUsuario ="+lblfield2.getText());
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
-                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(3,"+Tfield2.getText()+")");
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(3,"+lblfield2.getText()+")");
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
@@ -202,9 +202,9 @@ public class OtorgarPermisos {
         });
         
         personal.setOnAction(e->{
-           if(isNumeric(Tfield2.getText())){
+           if(isNumeric(lblfield2.getText())){
     
-            String codigo=Tfield2.getText();
+            String codigo=lblfield2.getText();
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and permiso =\"personal\" and u.id ="+codigo;
             
             buildData(query); 
@@ -213,15 +213,15 @@ public class OtorgarPermisos {
                 ResultSet rs = con.createStatement().executeQuery(query);
                 if (rs.next()){
                 try {
-                    con.createStatement().execute("delete from tablapermiso where idPermiso=4 and idUsuario ="+Tfield2.getText());
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("delete from tablapermiso where idPermiso=4 and idUsuario ="+lblfield2.getText());
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
-                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(4,"+Tfield2.getText()+")");
-                    buildData(this.Viewquery);
+                    con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(4,"+lblfield2.getText()+")");
+                    buildData(this.viewquery);
                 } catch (SQLException ex) {
                     System.err.println("Error in SQL code: "+ex.getMessage());
                 }
@@ -236,17 +236,17 @@ public class OtorgarPermisos {
             
         });
         
-        Enlistar.setOnAction(e->{
-            buildData(Viewquery);
+        enlistar.setOnAction(e->{
+            buildData(viewquery);
 
             
         });
-        Menu.setOnAction(e->{
+        regresar.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
         });
-        Buscar.setOnAction(e->  {
-             BuscarEvent();
+        buscar.setOnAction(e->  {
+             buscarEvent();
         });
         
     }
@@ -258,11 +258,11 @@ public class OtorgarPermisos {
         this.root = root;
     }
    
-    public void BuscarEvent(){
-        if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
+    public void buscarEvent(){
+        if (lblfield.getText().isEmpty()) {buildData(this.viewquery);}
         else  {
                 
-            String nombre=Tfield.getText();
+            String nombre=lblfield.getText();
             String query = "select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso and u.nombre like \"%"+nombre+"%\"";
             
             buildData(query);
@@ -271,7 +271,7 @@ public class OtorgarPermisos {
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -335,17 +335,17 @@ public class OtorgarPermisos {
             System.out.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.out.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void cargarScene(Scene scene,String titulo)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

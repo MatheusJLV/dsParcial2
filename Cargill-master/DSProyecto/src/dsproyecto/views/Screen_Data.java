@@ -26,16 +26,35 @@ import javafx.stage.Stage;
  * @author medin
  */
 public class Screen_Data {
-    Label l1=new Label(),l2=new Label(),l3=new Label(),l4=new Label(),l5=new Label(),l6=new Label(),l7=new Label(),l8=new Label(),l9=new Label(),l10=new Label(),l11=new Label("");
-    TextField t1=new TextField(),t2=new TextField(),t3=new TextField(),t4=new TextField(),t5=new TextField(),t6=new TextField(),t7=new TextField(),t8=new TextField(),t9=new TextField(),t10=new TextField();
+    Label lbox1=new Label();
+    Label lbox2=new Label();
+    Label lbox3=new Label();
+    Label lbox4=new Label();
+    Label lbox5=new Label();
+    Label lbox6=new Label();
+    Label lbox7=new Label();
+    Label lbox8=new Label();
+    Label lbox9=new Label();
+    Label lbox10=new Label();
+    Label lbox11=new Label("");
+    TextField tbox1=new TextField();
+    TextField tbox2=new TextField();
+    TextField tbox3=new TextField();
+    TextField tbox4=new TextField();
+    TextField tbox5=new TextField();
+    TextField tbox6=new TextField();
+    TextField tbox7=new TextField();
+    TextField tbox8=new TextField();
+    TextField tbox9=new TextField();
+    TextField tbox10=new TextField();
     Button bt= new Button("Done");
     Pane root = new Pane();
-    HBox f1=new HBox(10);
-    HBox f2=new HBox(10);
-    HBox f3=new HBox(10);
-    HBox f4=new HBox(10);
-    HBox f5=new HBox(10);
-    VBox c1= new VBox(20);
+    HBox fbox1=new HBox(10);
+    HBox fbox2=new HBox(10);
+    HBox fbox3=new HBox(10);
+    HBox fbox4=new HBox(10);
+    HBox fbox5=new HBox(10);
+    VBox containerBox= new VBox(20);
     ArrayList<Label> list1 =new ArrayList();
     ArrayList<TextField> list2 =new ArrayList();
     ArrayList<String> data =new ArrayList();
@@ -44,7 +63,7 @@ public class Screen_Data {
     
     Connection con;
     String query;
-    String Udatequery;
+    String udatequery;
     int add0=1;
     ObservableList rowList;
     
@@ -55,11 +74,11 @@ public class Screen_Data {
         this.con=con;
         this.query=query;
         this.add0=add0;
-        this.Udatequery=Updatequery;
+        this.udatequery=Updatequery;
         this.rowList=rowList;
         
-        list1.add(l1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(t1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(lbox1);list1.add(lbox2);list1.add(lbox3);list1.add(lbox4);list1.add(lbox5);list1.add(lbox6);list1.add(lbox7);list1.add(lbox8);list1.add(lbox9);list1.add(lbox10);
+        list2.add(tbox1);list2.add(tbox2);list2.add(tbox3);list2.add(tbox4);list2.add(tbox5);list2.add(tbox6);list2.add(tbox7);list2.add(tbox8);list2.add(tbox9);list2.add(tbox10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -68,13 +87,13 @@ public class Screen_Data {
             t.setMinSize(70, 30);
             t.setDisable(true);
         }
-        Build();
+        build();
         SetValues();
         
         bt.setOnAction(e->{
             getData();
             try {
-                ExecuteQuery("UPDATE articulo SET nombre=\""+t2.getText()+"\", descripcion= \""+t3.getText()+"\", preciobase="+t4.getText()+" WHERE id="+t1.getText());
+                executeQuery("UPDATE articulo SET nombre=\""+tbox2.getText()+"\", descripcion= \""+tbox3.getText()+"\", preciobase="+tbox4.getText()+" WHERE id="+tbox1.getText());
                
                 
             } catch (Exception r) {
@@ -91,12 +110,12 @@ public class Screen_Data {
         this.con=con;
         this.query=query;
         this.add0=add0;
-        this.Udatequery=Updatequery;
+        this.udatequery=Updatequery;
         this.rowList=rowList;
         this.Pedido=b;
         
-        list1.add(l1);list1.add(l2);list1.add(l3);list1.add(l4);list1.add(l5);list1.add(l6);list1.add(l7);list1.add(l8);list1.add(l9);list1.add(l10);
-        list2.add(t1);list2.add(t2);list2.add(t3);list2.add(t4);list2.add(t5);list2.add(t6);list2.add(t7);list2.add(t8);list2.add(t9);list2.add(t10);
+        list1.add(lbox1);list1.add(lbox2);list1.add(lbox3);list1.add(lbox4);list1.add(lbox5);list1.add(lbox6);list1.add(lbox7);list1.add(lbox8);list1.add(lbox9);list1.add(lbox10);
+        list2.add(tbox1);list2.add(tbox2);list2.add(tbox3);list2.add(tbox4);list2.add(tbox5);list2.add(tbox6);list2.add(tbox7);list2.add(tbox8);list2.add(tbox9);list2.add(tbox10);
         for (Label l : list1) {
             l.setMinSize(70, 30);
             
@@ -105,7 +124,7 @@ public class Screen_Data {
             t.setMinSize(70, 30);
             t.setDisable(true);
         }
-        Build();
+        build();
         SetValues();
         
         bt.setOnAction(e->{
@@ -121,12 +140,12 @@ public class Screen_Data {
                     data.clear();data.addAll(subdata2);data.addAll(subdata1);
                     String str=String.format(Updatequery, data.toArray());
                     
-                    ExecuteQuery(str);
+                    executeQuery(str);
                     System.out.println(str);
                 }else{
                     String str=String.format(Updatequery,data.toArray());
                     System.out.println(str);
-                    ExecuteQuery(str);
+                    executeQuery(str);
                 }
                 
                 
@@ -167,17 +186,17 @@ public class Screen_Data {
     
     
     
-    public void Build(){
+    public void build(){
     
-    f1.getChildren().addAll(l1,t1,l2,t2);
-    f2.getChildren().addAll(l3,t3,l4,t4);
-    f3.getChildren().addAll(l5,t5,l6,t6);
-    f4.getChildren().addAll(l7,t7,l8,t8);
-    f5.getChildren().addAll(l9,t9,l10,t10);
-    c1.getChildren().addAll(f1,f2,f3,f4,f5,l11,bt);
-    c1.setPadding(new Insets(20, 20, 20, 20));
-    c1.setAlignment(Pos.CENTER);
-    root.getChildren().add(c1);
+    fbox1.getChildren().addAll(lbox1,tbox1,lbox2,tbox2);
+    fbox2.getChildren().addAll(lbox3,tbox3,lbox4,tbox4);
+    fbox3.getChildren().addAll(lbox5,tbox5,lbox6,tbox6);
+    fbox4.getChildren().addAll(lbox7,tbox7,lbox8,tbox8);
+    fbox5.getChildren().addAll(lbox9,tbox9,lbox10,tbox10);
+    containerBox.getChildren().addAll(fbox1,fbox2,fbox3,fbox4,fbox5,lbox11,bt);
+    containerBox.setPadding(new Insets(20, 20, 20, 20));
+    containerBox.setAlignment(Pos.CENTER);
+    root.getChildren().add(containerBox);
     
     }
     
@@ -188,7 +207,7 @@ public class Screen_Data {
     public void SetValues(){
         
         try (ResultSet rs = con.createStatement().executeQuery(this.query);
-                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+l1.getText()+" = "+rowList.get(0));){
+                ResultSet rs2 = con.createStatement().executeQuery(this.query+" where "+lbox1.getText()+" = "+rowList.get(0));){
             
             
             
@@ -221,7 +240,7 @@ public class Screen_Data {
         
     }
     
-      public void ExecuteQuery(String query){
+      public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.executeUpdate(query);
             
