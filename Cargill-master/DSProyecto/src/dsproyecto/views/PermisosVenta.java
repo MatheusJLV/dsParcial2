@@ -47,9 +47,7 @@ public class PermisosVenta {
     TextField Tfield= new TextField();
 
     String Viewquery;
-    String Addquery;
     String Delquery;
-    String Modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -89,9 +87,7 @@ public class PermisosVenta {
         
         Viewquery="select u.nombre as vendedor, c.nombre as cliente, v.fecha, sum(d.cantidad*d.precio) as total from usuario u,venta v ,detalleventa d,cliente c where v.idCliente= c.id and v.idVendedor=u.id and d.idventa=v.id group by v.id";
         //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
         Delquery="DELETE FROM cliente\n" +"WHERE id=";
-        Modquery="UPDATE articulo SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
         
         
         buildData(Viewquery);
@@ -126,7 +122,6 @@ public class PermisosVenta {
        });
         
     }
-//580491
     public Pane getRoot() {
         return root;
     }

@@ -141,7 +141,6 @@ public class VendedorView {
         });
         
     }
-//580491
     public Pane getRoot() {
         return root;
     }
@@ -215,7 +214,6 @@ public class VendedorView {
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
             }
 
             /**
@@ -231,7 +229,6 @@ public class VendedorView {
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
                 data.add(row);
 
             }
@@ -239,8 +236,7 @@ public class VendedorView {
             //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+            System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
     public void ExecuteQuery(String query){
@@ -248,7 +244,7 @@ public class VendedorView {
             st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }

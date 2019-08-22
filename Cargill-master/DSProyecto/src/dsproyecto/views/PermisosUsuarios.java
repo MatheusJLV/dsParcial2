@@ -97,7 +97,6 @@ Connection con;
         //                                   %s para int     \"%s\"   para varchar
         Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
         Delquery="DELETE FROM cliente\n" +"WHERE id=";
-        Modquery="UPDATE articulo SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
         
         
         buildData(Viewquery);
@@ -149,7 +148,6 @@ Connection con;
        });
         
     }
-//580491
     public Pane getRoot() {
         return root;
     }

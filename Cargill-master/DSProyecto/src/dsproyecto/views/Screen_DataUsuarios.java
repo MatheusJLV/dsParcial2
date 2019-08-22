@@ -83,22 +83,10 @@ public class Screen_DataUsuarios {
                                             +t6.getText()+"\",\""+t7.getText()+"\",\""+t8.getText()+"\"");
 
                 }
-                /*if(add0==1){
-                    String d1=data.get(0);
-                    data.remove(d1);
-                    data.add(d1);
-                    String str=String.format(Updatequery, data.toArray());
-                    System.out.println(str);
-                    ExecuteQuery(str);
-                }else{
-                    String str=String.format(Updatequery,data.toArray());
-                    System.out.println(str);
-                    ExecuteQuery(str);
-                }
-                */
+
                 
             } catch (Exception r) {
-                System.out.println("Error con datos: "+ r.getMessage());
+                System.err.println("Error con datos: "+ r.getMessage());
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -151,7 +139,7 @@ public class Screen_DataUsuarios {
                 
                 
             } catch (Exception r) {
-                System.out.println("Error con datos: "+ r.getMessage());
+                System.err.println("Error con datos: "+ r.getMessage());
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -239,7 +227,7 @@ public class Screen_DataUsuarios {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
+            System.err.println("Error: "+e.getMessage());
         }
     
         
@@ -252,7 +240,7 @@ public class Screen_DataUsuarios {
             st.executeUpdate(query);
             
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }  

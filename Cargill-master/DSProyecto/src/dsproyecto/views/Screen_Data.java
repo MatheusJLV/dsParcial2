@@ -78,7 +78,7 @@ public class Screen_Data {
                
                 
             } catch (Exception r) {
-                System.out.println("Error con datos: "+ r.getMessage());
+                System.err.println("Error con datos: "+ r.getMessage());
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -175,7 +175,6 @@ public class Screen_Data {
     f4.getChildren().addAll(l7,t7,l8,t8);
     f5.getChildren().addAll(l9,t9,l10,t10);
     c1.getChildren().addAll(f1,f2,f3,f4,f5,l11,bt);
-    //c1.setMinSize(320, 400);
     c1.setPadding(new Insets(20, 20, 20, 20));
     c1.setAlignment(Pos.CENTER);
     root.getChildren().add(c1);

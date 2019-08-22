@@ -89,12 +89,7 @@ public class PermisosEnvios {
         
         
         Viewquery="select j.nombre as Jefe, r.nombre as Repartidor, e.estado, e.detalles, l.direccion, e.id from envio e, usuario j, usuario r, establecimiento l where e.idJefe=j.id and e.idRepartidor = r.id and e.idEstablecimiento=l.id";
-        //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
-        Delquery="DELETE FROM cliente\n" +"WHERE id=";
-        Modquery="UPDATE articulo SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
-        
-        
+               
         buildData(Viewquery);
         Buscar.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();

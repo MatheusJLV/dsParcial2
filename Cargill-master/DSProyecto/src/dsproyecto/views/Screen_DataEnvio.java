@@ -75,22 +75,10 @@ public class Screen_DataEnvio {
             getData();
             try {
                 ExecuteQuery("UPDATE envio SET estado=\""+t1.getText()+"\" where id="+t2.getText());
-                /*if(add0==1){
-                    String d1=data.get(0);
-                    data.remove(d1);
-                    data.add(d1);
-                    String str=String.format(Updatequery, data.toArray());
-                    System.out.println(str);
-                    ExecuteQuery(str);
-                }else{
-                    String str=String.format(Updatequery,data.toArray());
-                    System.out.println(str);
-                    ExecuteQuery(str);
-                }
-                */
+
                 
             } catch (Exception r) {
-                System.out.println("Error con datos: "+ r.getMessage());
+                System.err.println("Error con datos: "+ r.getMessage());
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -118,7 +106,6 @@ public class Screen_DataEnvio {
             t.setDisable(true);
         }
         Build();
-        //SetValues();
         
         bt.setOnAction(e->{
             getData();
@@ -143,7 +130,7 @@ public class Screen_DataEnvio {
                 
                 
             } catch (Exception r) {
-                System.out.println("Error con datos: "+ r.getMessage());
+                System.err.println("Error con datos: "+ r.getMessage());
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -187,11 +174,9 @@ public class Screen_DataEnvio {
     f4.getChildren().addAll(l7,t7,l8,t8);
     f5.getChildren().addAll(l9,t9,l10,t10);
     c1.getChildren().addAll(f1,f2,f3,f4,f5,l11,bt);
-    //c1.setMinSize(320, 400);
     c1.setPadding(new Insets(20, 20, 20, 20));
     c1.setAlignment(Pos.CENTER);
     root.getChildren().add(c1);
-    //asignar nombres a los labels y tamaños en cada constructoro
     
     
     
@@ -231,7 +216,7 @@ public class Screen_DataEnvio {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
+            System.err.println("Error: "+e.getMessage());
         }
     
         
@@ -244,7 +229,7 @@ public class Screen_DataEnvio {
             st.executeUpdate(query);
             
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }  

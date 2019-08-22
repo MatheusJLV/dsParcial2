@@ -92,33 +92,10 @@ public class OtorgarPermisos {
         + "-fx-border-width: 3;" + "-fx-border-insets: 20;"
         + "-fx-border-radius: 5;" + "-fx-border-color: grey;");
         
-        
-        
-        
+
         
         Viewquery="select u.id, nombre, cargo, permiso from usuario u, tablapermiso t, permiso p where u.id=t.idUsuario and p.id=t.idPermiso";
-        //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into usuario values (%s,\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\",\"%s\");";
-        Delquery="DELETE FROM usuario\n" +"WHERE id=";
-        
-        
-        
-        //buildData(Viewquery);
-        /*
-        Del.setOnAction(e->{
-           
-            ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
-            if (rowList!=null){
-                String Cod= rowList.get(0).toString();
-            
-                String q=Delquery+Cod;
-                ExecuteQuery(q);
-            }
-            
-            
-        });
-        
-        */
+
         
         inventario.setOnAction(e->{
            if(isNumeric(Tfield2.getText())){
@@ -135,14 +112,14 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=1 and idUsuario ="+Tfield2.getText());
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(1,"+Tfield2.getText()+")");
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             }
             } catch(Exception except){
@@ -163,25 +140,24 @@ public class OtorgarPermisos {
             
             buildData(query); 
             try (ResultSet rs = con.createStatement().executeQuery(query);){
-                            //ResultSet
                 
                 if (rs.next()){
                 try {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=2 and idUsuario ="+Tfield2.getText());
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(2,"+Tfield2.getText()+")");
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             }
             } catch(Exception except){
-              System.err.print("error");
+              System.err.print(except.toString());
             }
 
            } 
@@ -205,18 +181,18 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=3 and idUsuario ="+Tfield2.getText());
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(3,"+Tfield2.getText()+")");
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             }
             } catch(Exception except){
-              System.err.print("error");
+              System.err.print(except.toString());
             }
 
            } 
@@ -233,25 +209,25 @@ public class OtorgarPermisos {
             
             buildData(query); 
             try {
-                            //ResultSet
+
                 ResultSet rs = con.createStatement().executeQuery(query);
                 if (rs.next()){
                 try {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=4 and idUsuario ="+Tfield2.getText());
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(4,"+Tfield2.getText()+")");
                     buildData(this.Viewquery);
                 } catch (SQLException ex) {
-                    System.out.println("Error in SQL code: "+ex.getMessage());
+                    System.err.println("Error in SQL code: "+ex.getMessage());
                 }
             }
             } catch(Exception except){
-              System.err.print("error");
+              System.err.print(except.toString());
             }
 
            } 
@@ -260,15 +236,9 @@ public class OtorgarPermisos {
             
         });
         
-        //AQUI ESTABA AGREGAR "NEW"
         Enlistar.setOnAction(e->{
             buildData(Viewquery);
-            /** para la creacion en menu flotante
-            ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
-             
-            Screen_Data  sc=new Screen_Data(con,Viewquery, rowList, 0,Addquery);
-            ShowWindow(new Scene(sc.getRoot()));
-             */
+
             
         });
         Menu.setOnAction(e->{
@@ -280,7 +250,6 @@ public class OtorgarPermisos {
         });
         
     }
-//580491
     public Pane getRoot() {
         return root;
     }
@@ -330,19 +299,9 @@ public class OtorgarPermisos {
         data = FXCollections.observableArrayList();
         try (ResultSet rs = con.createStatement().executeQuery(query);){
             
-            //SQL FOR SELECTING ALL OF CUSTOMER
-            
-            //ResultSet
-            
-
-            /**
-             * ********************************
-             * TABLE COLUMN ADDED DYNAMICALLY *
-             *********************************
-             */
+         
             tableview.getColumns().clear();
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                //We are using non property style for making dynamic table
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
                 col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
@@ -352,7 +311,6 @@ public class OtorgarPermisos {
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
             }
 
             /**
@@ -361,14 +319,11 @@ public class OtorgarPermisos {
              *******************************
              */
             while (rs.next()) {
-                //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //Iterate Column
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
                 data.add(row);
 
             }
@@ -398,13 +353,5 @@ public class OtorgarPermisos {
      
      
      }
-    private void ShowWindow(Scene scene) {
     
-    Stage st= new Stage();
-    st.setScene(scene);
-    
-    st.initModality(Modality.WINDOW_MODAL);
-    st.initOwner(root.getScene().getWindow() );
-    st.show();
-}
 }
