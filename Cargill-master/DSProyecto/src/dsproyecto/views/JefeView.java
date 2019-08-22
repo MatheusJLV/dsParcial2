@@ -20,43 +20,43 @@ class JefeView {
     Pane abajo = new Pane();
     
     //botones
-    Button btn_solicitarEnvio=new Button("Solicitar Envio");
-    Button btn_solicitarAbastecimiento=new Button("Solicitar Abastecimiento");
+    Button btnsolicitarEnvio=new Button("Solicitar Envio");
+    Button btnsolicitarAbastecimiento=new Button("Solicitar Abastecimiento");
     Button crearOrdenDeAbastecimiento=new Button("Crear orden de abastecimiento");
-    Button btn_PantallaEnvios=new Button("Envios");
-    Button btn_RegistrodeReporte=new Button("registro de reportes");
-    Button btn_PermisosExtra=new Button("permisos extras");
+    Button btnPantallaEnvios=new Button("Envios");
+    Button btnRegistrodeReporte=new Button("registro de reportes");
+    Button btnPermisosExtra=new Button("permisos extras");
     
     public JefeView(Connection con){
         this.con=con;
         
         
-        btn_solicitarEnvio.setOnAction(e->{
-            SeleccionarVenta();
+        btnsolicitarEnvio.setOnAction(e->{
+            seleccionarVenta();
         });
         
-        btn_solicitarAbastecimiento.setOnAction(e->{
-            SeleccionarAbastecimiento();
+        btnsolicitarAbastecimiento.setOnAction(e->{
+            seleccionarAbastecimiento();
         });
         
         crearOrdenDeAbastecimiento.setOnAction(e->{
-            IngresarDatos();
+            ingresarDatos();
         });
         
-        btn_PantallaEnvios.setOnAction(e->{
-            DatosEnvios();
+        btnPantallaEnvios.setOnAction(e->{
+            datosEnvios();
         });
         
-        btn_RegistrodeReporte.setOnAction(e->{
-            IngresarDatosExtra();
+        btnRegistrodeReporte.setOnAction(e->{
+            ingresarDatosExtra();
         });
         
-        btn_PermisosExtra.setOnAction(e->{
+        btnPermisosExtra.setOnAction(e->{
             System.out.print("este no se que hace :v");
         });
         
-        arriba.getChildren().addAll(btn_solicitarEnvio,btn_solicitarAbastecimiento,crearOrdenDeAbastecimiento,
-                btn_PantallaEnvios,btn_RegistrodeReporte,btn_PermisosExtra);
+        arriba.getChildren().addAll(btnsolicitarEnvio,btnsolicitarAbastecimiento,crearOrdenDeAbastecimiento,
+                btnPantallaEnvios,btnRegistrodeReporte,btnPermisosExtra);
         
         root.getChildren().addAll(arriba,abajo);
     }
@@ -67,27 +67,27 @@ class JefeView {
         return root;
     }
 
-    private void SeleccionarVenta() {
+    private void seleccionarVenta() {
         abajo.getChildren().clear();
         abajo.getChildren().addAll(new Button("aqui deberian salir la lista de ventas o algo asi"));
     }
 
-    private void SeleccionarAbastecimiento() {
+    private void seleccionarAbastecimiento() {
         abajo.getChildren().clear();
         abajo.getChildren().addAll(new Button("abastecimiento"));
     }
 
-    private void IngresarDatos() {
+    private void ingresarDatos() {
         abajo.getChildren().clear();
         abajo.getChildren().addAll(new Button("IngresarDatos"));
     }
 
-    private void DatosEnvios() {
+    private void datosEnvios() {
         abajo.getChildren().clear();
         abajo.getChildren().addAll(new Button("DatosEnvios"));
     }
 
-    private void IngresarDatosExtra() {
+    private void ingresarDatosExtra() {
         abajo.getChildren().clear();
         abajo.getChildren().addAll(new Button("IngresarDatosExtra"));
     }

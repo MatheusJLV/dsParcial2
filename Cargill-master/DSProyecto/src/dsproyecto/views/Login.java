@@ -35,40 +35,40 @@ public class Login {
     HBox Hb2 = new HBox(20);
     HBox Hb3 = new HBox(20);
     Label l1= new Label("Estado");
-    TextField T_Estado=new TextField("Server: 192.168.56.102");
+    TextField tEstado=new TextField("Server: 192.168.56.102");
     
     
-    TextField t1=new TextField(user);
-    TextField t2=new PasswordField();
-    Button Conect= new Button("Conectar");
-    Label l_user= new Label("User:");
-    Label l_pass= new Label("Password:");
-    VBox Vb1 = new VBox(10);
+    TextField txt1=new TextField(user);
+    TextField txt2=new PasswordField();
+    Button connect= new Button("Conectar");
+    Label iuser= new Label("User:");
+    Label ipass= new Label("Password:");
+    VBox vBox1 = new VBox(10);
     Pane root=new Pane();
     
     
     
     public Login() {
-        Hb1.getChildren().addAll(l_user,t1);
-        Hb2.getChildren().addAll(l_pass,t2);
-        Hb3.getChildren().addAll(l1,Conect);
-        l_user.setMinSize(70, 20);
-        l_pass.setMinSize(70, 20);
+        Hb1.getChildren().addAll(iuser,txt1);
+        Hb2.getChildren().addAll(ipass,txt2);
+        Hb3.getChildren().addAll(l1,connect);
+        iuser.setMinSize(70, 20);
+        ipass.setMinSize(70, 20);
         l1.setMinSize(70, 20);
         
-        Vb1.getChildren().addAll(Hb1,Hb2,Hb3,T_Estado);
-        Vb1.setPadding(new Insets(10, 10, 10, 10));
-        Vb1.setStyle("-fx-border-style: solid inside;"
+        vBox1.getChildren().addAll(Hb1,Hb2,Hb3,tEstado);
+        vBox1.setPadding(new Insets(10, 10, 10, 10));
+        vBox1.setStyle("-fx-border-style: solid inside;"
         + "-fx-border-width: 3;" + "-fx-border-insets: 20;"
         + "-fx-border-radius: 5;" + "-fx-border-color: grey;");
-        Vb1.setMaxSize(400, 200);
-        Vb1.setMinSize(400, 200);
+        vBox1.setMaxSize(400, 200);
+        vBox1.setMinSize(400, 200);
         
         
-        t2.setText(pass);
-        root.getChildren().add(Vb1);
+        txt2.setText(pass);
+        root.getChildren().add(vBox1);
         
-        Conect.setOnAction(e->{
+        connect.setOnAction(e->{
         conectar();
         });
         
@@ -79,10 +79,10 @@ public class Login {
         try{
             Class.forName(driver);
            
-            con= (Connection) DriverManager.getConnection(url, t1.getText(), t2.getText());
+            con= DriverManager.getConnection(url, txt1.getText(), txt2.getText());
           
             if (con!=null){
-               T_Estado.setText("Conexion establecida");
+               tEstado.setText("Conexion establecida");
                LoginUsuario l=new LoginUsuario(con);
                  Stage st= (Stage)root.getScene().getWindow();
                  st.setScene(new Scene(l.getRoot(), 400, 400));
@@ -90,7 +90,7 @@ public class Login {
             }
         }
         catch (ClassNotFoundException | SQLException e){
-            T_Estado.setText("Error de conexion: " + e.getMessage());
+            tEstado.setText("Error de conexion: " + e.getMessage());
         }
     }
 

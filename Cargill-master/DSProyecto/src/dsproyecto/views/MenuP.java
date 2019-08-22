@@ -59,7 +59,7 @@ public class MenuP {
         
         
         Usuarios.setOnAction(e->{
-            BuscarUsuarios b=new BuscarUsuarios(con);
+            buscarUsuarios b=new buscarUsuarios(con);
             Cargar_Scene(new Scene(b.getRoot(),800,400));
         });
         

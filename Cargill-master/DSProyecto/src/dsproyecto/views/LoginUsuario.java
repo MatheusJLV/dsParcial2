@@ -31,25 +31,25 @@ public class LoginUsuario {
    
     private static final String user="jlmedina";
     private static final String pass="1234";
-    HBox Hb1 = new HBox(20);
-    HBox Hb2 = new HBox(20);
-    HBox Hb3 = new HBox(20);
+    HBox hb1 = new HBox(20);
+    HBox hb2 = new HBox(20);
+    HBox hb3 = new HBox(20);
     
-    TextField t1=new TextField(user);
-    TextField t2=new PasswordField();
+    TextField txt1=new TextField(user);
+    TextField txt2=new PasswordField();
     Button Conect= new Button("Ingresar");
-    Label l_user= new Label("User:");
-    Label l_pass= new Label("Password:");
-    VBox Vb1 = new VBox(10);
+    Label iuser= new Label("User:");
+    Label ipass= new Label("Password:");
+    VBox vb1 = new VBox(10);
     Pane root=new Pane();
-    String Cargo="";
+    String cargo="";
 
     public LoginUsuario(Connection cone) {
         con = cone;
         Build();
         
         Conect.setOnAction(e->{
-            try ( ResultSet rs = con.createStatement().executeQuery("select cargo from usuario where username=\""+t1.getText()+"\" and userpa"+"ssw"+"ord=\""+t2.getText()+"\";");
+            try ( ResultSet rs = con.createStatement().executeQuery("select cargo from usuario where username=\""+txt1.getText()+"\" and userpa"+"ssw"+"ord=\""+txt2.getText()+"\";");
 ){
                 
                 
@@ -57,13 +57,13 @@ public class LoginUsuario {
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
                 
-                    if(rs.getString(1)!=null){Cargo=rs.getString(1);}
+                    if(rs.getString(1)!=null){cargo=rs.getString(1);}
                 
 
                 }
-                System.err.println(Cargo);
+                System.err.println(cargo);
                    
-                    switch (Cargo){
+                    switch (cargo){
                             case "Vendedor":
                                 
                                 VendedorView b=new VendedorView(con);
@@ -72,7 +72,7 @@ public class LoginUsuario {
                                 break;
                             case "Gerente":
                                 
-                                MenuGerente b2=new MenuGerente(con);
+                                menuGerente b2=new menuGerente(con);
                                 Scene s2= new Scene(b2.getRoot(),800,400);
                                 Cargar_Scene(s2);
                                 break;
@@ -102,22 +102,22 @@ public class LoginUsuario {
     
     
     public void Build(){
-        Hb1.getChildren().addAll(l_user,t1);
-        Hb2.getChildren().addAll(l_pass,t2);
-        l_user.setMinSize(70, 20);
-        l_pass.setMinSize(70, 20);
+        hb1.getChildren().addAll(iuser,txt1);
+        hb2.getChildren().addAll(ipass,txt2);
+        iuser.setMinSize(70, 20);
+        ipass.setMinSize(70, 20);
         
         
-        Vb1.getChildren().addAll(Hb1,Hb2,Conect);
-        Vb1.setPadding(new Insets(10, 10, 10, 10));
-        Vb1.setAlignment(Pos.CENTER);
-        Vb1.setStyle("-fx-border-style: solid inside;"
+        vb1.getChildren().addAll(hb1,hb2,Conect);
+        vb1.setPadding(new Insets(10, 10, 10, 10));
+        vb1.setAlignment(Pos.CENTER);
+        vb1.setStyle("-fx-border-style: solid inside;"
         + "-fx-border-width: 3;" + "-fx-border-insets: 20;"
         + "-fx-border-radius: 5;" + "-fx-border-color: grey;");
-        Vb1.setMaxSize(400, 200);
-        Vb1.setMinSize(400, 200);
-        t2.setText(pass);
-        root.getChildren().add(Vb1);
+        vb1.setMaxSize(400, 200);
+        vb1.setMinSize(400, 200);
+        txt1.setText(pass);
+        root.getChildren().add(vb1);
         
         
     

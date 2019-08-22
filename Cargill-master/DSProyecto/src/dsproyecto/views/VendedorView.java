@@ -39,20 +39,20 @@ public class VendedorView {
     HBox head=new HBox(50);
     HBox opcional=new HBox();
     HBox bottom=new HBox(80);
-    VBox Vb=new VBox(4);
-    Button New= new Button(" Agregar ");
-    Button Del= new Button("  Borrar ");
-    Button Mod= new Button("Modificar");
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button("  Buscar ");
-    Button Cotizar= new Button("  Cotizar ");
-    Button Venta= new Button("  Venta ");
+    VBox vBox1=new VBox(4);
+    Button btnNew= new Button(" Agregar ");
+    Button btnDel= new Button("  Borrar ");
+    Button btnMOD= new Button("Modificar");
+    Button btnMENU= new Button(" Regresar");
+    Button btnBuscar= new Button("  Buscar ");
+    Button btnCotizar= new Button("  Cotizar ");
+    Button btnVenta= new Button("  Venta ");
     Label label=new Label("Codigo de Cliente");
-    TextField Tfield= new TextField();
-    String Viewquery;
-    String Addquery;
-    String Delquery;
-    String Modquery;
+    TextField tfield= new TextField();
+    String viewquery;
+    String addquery;
+    String delquery;
+    String modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -70,14 +70,14 @@ public class VendedorView {
         
         tableview.setMinSize(720, 280);
         tableview.setMaxSize(720, 280);
-        head.getChildren().addAll(label,Tfield,Buscar,New);
+        head.getChildren().addAll(label,tfield,btnBuscar,btnNew);
         head.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Cotizar,Venta,Mod,Del,Menu);
+        bottom.getChildren().addAll(btnCotizar,btnVenta,btnMOD,btnDel,btnMENU);
         bottom.setAlignment(Pos.CENTER);
-        Vb.getChildren().addAll(head,tableview,bottom);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        vBox1.getChildren().addAll(head,tableview,bottom);
+        vBox1.setPadding(new Insets(30, 40, 20, 40));
+        vBox1.setAlignment(Pos.CENTER);
+        root.getChildren().add(vBox1);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -88,56 +88,56 @@ public class VendedorView {
         
         
         
-        Viewquery="select * from cliente ";
+        viewquery="select * from cliente ";
         //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
-        Delquery="DELETE FROM cliente\n" +"WHERE id=";
-        Modquery="UPDATE cliente SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
+        addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
+        delquery="DELETE FROM cliente\n" +"WHERE id=";
+        modquery="UPDATE cliente SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
         
         
-        buildData(Viewquery);
-        Buscar.setOnAction(e->{
+        buildData(viewquery);
+        btnBuscar.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
                 
             }
         });
-        Del.setOnAction(e->{
+        btnDel.setOnAction(e->{
            
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
                 String Cod= rowList.get(0).toString();
             
-                String q=Delquery+Cod;
-                ExecuteQuery(q);
+                String q=delquery+Cod;
+                executeQuery(q);
             }
             
             
         });
         
-        Mod.setOnAction(e->{
+        btnMOD.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
-            Screen_Data  sc=new Screen_Data(con, Viewquery, rowList, 1,Modquery);
+            Screen_Data  sc=new Screen_Data(con, viewquery, rowList, 1,modquery);
             ShowWindow(new Scene(sc.getRoot()));
             }
         });
         
         
-        New.setOnAction(e->{
+        btnNew.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
              
-            Screen_Data  sc=new Screen_Data(con,Viewquery, rowList, 0,Addquery);
+            Screen_Data  sc=new Screen_Data(con,viewquery, rowList, 0,addquery);
             ShowWindow(new Scene(sc.getRoot()));
              
             
         });
-        Menu.setOnAction(e->{
+        btnMENU.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
         });
-        Buscar.setOnAction(e->  {
-             BuscarEvent();
+        btnBuscar.setOnAction(e->  {
+             buscarEvent();
         });
         
     }
@@ -149,21 +149,21 @@ public class VendedorView {
         this.root = root;
     }
    
-    public void BuscarEvent(){
-        if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
-        else if (isNumeric(Tfield.getText())) {
+    public void buscarEvent(){
+        if (tfield.getText().isEmpty()) {buildData(this.viewquery);}
+        else if (isNumeric(tfield.getText())) {
                 
-            String numC=Tfield.getText();
+            String numC=tfield.getText();
             String query = "select * from cliente where cliente.id="+numC;
             
             buildData(query);
             
         }
-        else  {ErrorAlert(" El Campo Tiene Letras o Simbolos ");}
+        else  {errorAlert(" El Campo Tiene Letras o Simbolos ");}
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -239,17 +239,17 @@ public class VendedorView {
             System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void cargarScene(Scene scene,String titulo)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

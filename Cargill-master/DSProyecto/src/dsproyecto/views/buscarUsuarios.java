@@ -33,25 +33,25 @@ import javafx.util.Callback;
  *
  * @author medin
  */
-public class BuscarUsuarios {
+public class buscarUsuarios {
     Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
     HBox opcional=new HBox();
     HBox bottom=new HBox(150);
-    VBox Vb=new VBox(4);
-    Button New= new Button(" Agregar ");
-    Button Del= new Button("  Borrar ");
-    Button Mod= new Button("Modificar");
-    Button Menu= new Button(" Regresar");
-    Button Buscar= new Button("  Buscar ");
+    VBox vb1=new VBox(4);
+    Button btnNew1= new Button(" Agregar ");
+    Button btnDel1= new Button("  Borrar ");
+    Button btnMod1= new Button("Modificar");
+    Button btnMenu1= new Button(" Regresar");
+    Button btnBuscar= new Button("  Buscar ");
     
     Label label=new Label("Codigo de Cliente");
-    TextField Tfield= new TextField();
-    String Viewquery;
-    String Addquery;
-    String Delquery;
-    String Modquery;
+    TextField tfield= new TextField();
+    String viewquery;
+    String addquery;
+    String delquery;
+    String modquery;
     
     
     private ObservableList<ObservableList> data;
@@ -60,7 +60,7 @@ public class BuscarUsuarios {
     
     
 
-    public BuscarUsuarios(Connection con) {
+    public buscarUsuarios(Connection con) {
         this.con = con;
         
      
@@ -69,14 +69,14 @@ public class BuscarUsuarios {
         
         tableview.setMinSize(720, 280);
         tableview.setMaxSize(720, 280);
-        head.getChildren().addAll(label,Tfield,Buscar,New);
+        head.getChildren().addAll(label,tfield,btnBuscar,btnNew1);
         head.setAlignment(Pos.CENTER);
-        bottom.getChildren().addAll(Mod,Del,Menu);
+        bottom.getChildren().addAll(btnMod1,btnDel1,btnMenu1);
         bottom.setAlignment(Pos.CENTER);
-        Vb.getChildren().addAll(head,tableview,bottom);
-        Vb.setPadding(new Insets(30, 40, 20, 40));
-        Vb.setAlignment(Pos.CENTER);
-        root.getChildren().add(Vb);
+        vb1.getChildren().addAll(head,tableview,bottom);
+        vb1.setPadding(new Insets(30, 40, 20, 40));
+        vb1.setAlignment(Pos.CENTER);
+        root.getChildren().add(vb1);
         root.setMinSize(800, 400);
         root.setMaxSize(800, 400);
         root.setStyle("-fx-border-style: solid inside;"
@@ -87,23 +87,23 @@ public class BuscarUsuarios {
         
         
         
-        Viewquery="select * from usuario ";
+        viewquery="select * from usuario ";
         //                                   %s para int     \"%s\"   para varchar
-        Addquery="Insert into usuario values (%s,\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\",\"%s\");";
-        Delquery="DELETE FROM usuario\n" +"WHERE id=";
+        addquery="Insert into usuario values (%s,\"%s\", %s, \"%s\", \"%s\", \"%s\", \"%s\",\"%s\");";
+        delquery="DELETE FROM usuario\n" +"WHERE id=";
         
         
         
-        buildData(Viewquery);
+        buildData(viewquery);
         
-        Del.setOnAction(e->{
+        btnDel1.setOnAction(e->{
            
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
             if (rowList!=null){
                 String Cod= rowList.get(0).toString();
             
-                String q=Delquery+Cod;
-                ExecuteQuery(q);
+                String q=delquery+Cod;
+                executeQuery(q);
             }
             
             
@@ -112,20 +112,20 @@ public class BuscarUsuarios {
         
         
         
-        New.setOnAction(e->{
+        btnNew1.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
              
-            Screen_Data  sc=new Screen_Data(con,Viewquery, rowList, 0,Addquery);
-            ShowWindow(new Scene(sc.getRoot()));
+            Screen_Data  sc=new Screen_Data(con,viewquery, rowList, 0,addquery);
+            showWindow(new Scene(sc.getRoot()));
              
             
         });
-        Menu.setOnAction(e->{
+        btnMenu1.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
         });
-        Buscar.setOnAction(e->  {
-             BuscarEvent();
+        btnBuscar.setOnAction(e->  {
+             buscarEvent();
         });
         
     }
@@ -138,21 +138,21 @@ public class BuscarUsuarios {
         this.root = root;
     }
    
-    public void BuscarEvent(){
-        if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
-        else if (isNumeric(Tfield.getText())) {
+    public void buscarEvent(){
+        if (tfield.getText().isEmpty()) {buildData(this.viewquery);}
+        else if (isNumeric(tfield.getText())) {
                 
-            String numC=Tfield.getText();
+            String numC=tfield.getText();
             String query = "select * from usuario where usuario.id="+numC;
             
             buildData(query);
             
         }
-        else  {ErrorAlert(" El Campo Tiene Letras o Simbolos ");}
+        else  {errorAlert(" El Campo Tiene Letras o Simbolos ");}
     
             
             }
-    public void ErrorAlert(String x){
+    public void errorAlert(String x){
         Alert alert = new Alert(Alert.AlertType.ERROR);
  
         alert.setTitle("Error alert");
@@ -230,17 +230,17 @@ public class BuscarUsuarios {
             System.out.println("Error on Building Data: "+e.getMessage());
         }
     }
-    public void ExecuteQuery(String query){
+    public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
-            buildData(this.Viewquery);
+            buildData(this.viewquery);
         } catch (SQLException ex) {
             System.out.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void cargarScene(Scene scene,String titulo)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          
@@ -248,7 +248,7 @@ public class BuscarUsuarios {
      
      
      }
-    private void ShowWindow(Scene scene) {
+    private void showWindow(Scene scene) {
     
     Stage st= new Stage();
     st.setScene(scene);
