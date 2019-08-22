@@ -49,9 +49,9 @@ public class LoginUsuario {
         Build();
         
         Conect.setOnAction(e->{
-            try {
+            try ( ResultSet rs = con.createStatement().executeQuery("select cargo from usuario where username=\""+t1.getText()+"\" and userpa"+"ssw"+"ord=\""+t2.getText()+"\";");
+){
                 
-                ResultSet rs = con.createStatement().executeQuery("select cargo from usuario where username=\""+t1.getText()+"\" and userpassword=\""+t2.getText()+"\";");
                 
                 while (rs.next()) {
                 //Iterate Row
