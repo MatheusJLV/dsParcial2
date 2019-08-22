@@ -79,8 +79,10 @@ public class LoginUsuario {
                             case "Jefe":
                                 JefeView jv = new JefeView(con);
                                 Scene sceneJefe = new Scene(jv.getRoot(),800,400);
+                                break;
                             default:
                                 System.out.println(" Nada ");
+                                break;
                     }
                       
                 
