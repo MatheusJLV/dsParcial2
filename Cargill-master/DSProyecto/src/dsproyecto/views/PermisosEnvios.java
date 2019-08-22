@@ -123,7 +123,7 @@ public class PermisosEnvios {
         });
         Menu.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        Cargar_Scene(new Scene(m.getRoot(), 800, 400));
         });
         Buscar.setOnAction(e->  {
              if (Tfield.getText().isEmpty()) {buildData(this.Viewquery);}
@@ -149,7 +149,6 @@ public class PermisosEnvios {
        });
         
     }
-//580491
     public Pane getRoot() {
         return root;
     }
@@ -210,7 +209,6 @@ public class PermisosEnvios {
              */
             tableview.getColumns().clear();
             for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                //We are using non property style for making dynamic table
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
                 col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
@@ -229,23 +227,21 @@ public class PermisosEnvios {
              *******************************
              */
             while (rs.next()) {
-                //Iterate Row
+                
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //Iterate Column
+                    
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
+            
                 data.add(row);
 
             }
 
-            //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+            System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
     public void ExecuteQuery(String query){
@@ -253,12 +249,12 @@ public class PermisosEnvios {
             st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

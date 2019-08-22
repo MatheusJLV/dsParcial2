@@ -70,29 +70,29 @@ public class MenuGerente {
         
         Otorgar.setOnAction(e->{
             OtorgarPermisos b=new OtorgarPermisos(con);
-            Cargar_Scene(new Scene(b.getRoot(),800,400),"Otorgar");
+            Cargar_Scene(new Scene(b.getRoot(),800,400));
         });
         
         ManageInventario.setOnAction(e->{
             PermisosInventario b=new PermisosInventario(con);
-            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosInventario");
+            Cargar_Scene(new Scene(b.getRoot(),1000,400));
         });
         
         ManageVentas.setOnAction(e->{
             PermisosVenta b=new PermisosVenta(con);
-            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+            Cargar_Scene(new Scene(b.getRoot(),1000,400));
         });
         ManageEnvios.setOnAction(e->{
             PermisosEnvios b=new PermisosEnvios(con);
-            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+            Cargar_Scene(new Scene(b.getRoot(),1000,400));
         });
         ManagePersonal.setOnAction(e->{
             PermisosUsuarios b=new PermisosUsuarios(con);
-            Cargar_Scene(new Scene(b.getRoot(),1000,400),"PermisosVenta");
+            Cargar_Scene(new Scene(b.getRoot(),1000,400));
         });
         
     }
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

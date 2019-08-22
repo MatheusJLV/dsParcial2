@@ -60,13 +60,13 @@ public class MenuP {
         
         Usuarios.setOnAction(e->{
             BuscarUsuarios b=new BuscarUsuarios(con);
-            Cargar_Scene(new Scene(b.getRoot(),800,400),"Usuarios");
+            Cargar_Scene(new Scene(b.getRoot(),800,400));
         });
         
         
         
     }
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

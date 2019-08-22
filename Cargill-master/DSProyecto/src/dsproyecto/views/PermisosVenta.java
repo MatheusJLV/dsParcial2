@@ -110,7 +110,7 @@ public class PermisosVenta {
 
         Menu.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        Cargar_Scene(new Scene(m.getRoot(), 800, 400));
         });
 
         Buscar2.setOnAction(e->  {
@@ -197,7 +197,7 @@ public class PermisosVenta {
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
+               
             }
 
             /**
@@ -213,16 +213,16 @@ public class PermisosVenta {
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
+               
                 data.add(row);
 
             }
 
-            //FINALLY ADDED TO TableView
+            
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+            
+            System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
     public void ExecuteQuery(String query){
@@ -230,12 +230,12 @@ public class PermisosVenta {
             st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          
@@ -243,13 +243,5 @@ public class PermisosVenta {
      
      
      }
-    private void ShowWindow(Scene scene) {
     
-    Stage st= new Stage();
-    st.setScene(scene);
-    
-    st.initModality(Modality.WINDOW_MODAL);
-    st.initOwner(root.getScene().getWindow() );
-    st.show();
-}   
 }

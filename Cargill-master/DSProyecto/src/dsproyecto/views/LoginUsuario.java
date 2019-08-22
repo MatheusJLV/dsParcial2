@@ -44,8 +44,8 @@ public class LoginUsuario {
     Pane root=new Pane();
     String Cargo="";
 
-    public LoginUsuario(Connection con) {
-        this.con = con;
+    public LoginUsuario(Connection cone) {
+        con = cone;
         Build();
         
         Conect.setOnAction(e->{
@@ -61,30 +61,31 @@ public class LoginUsuario {
                 
 
                 }
-                System.out.println(Cargo);
+                System.err.println(Cargo);
                    
                     switch (Cargo){
                             case "Vendedor":
                                 
                                 VendedorView b=new VendedorView(con);
                                 Scene s= new Scene(b.getRoot(),800,400);
-                                Cargar_Scene(s,"Vendedor");
+                                Cargar_Scene(s);
                                 break;
                             case "Gerente":
                                 
                                 MenuGerente b2=new MenuGerente(con);
                                 Scene s2= new Scene(b2.getRoot(),800,400);
-                                Cargar_Scene(s2,"Vendedor");
+                                Cargar_Scene(s2);
                                 break;
                             case "Jefe":
                                 JefeView jv = new JefeView(con);
                                 Scene sceneJefe = new Scene(jv.getRoot(),800,400);
-
+                            default:
+                                System.out.println(" Nada ");
                     }
                       
                 
             } catch (Exception x) {
-                System.out.println(x.toString());
+                System.err.println(x.toString());
             }
                 
             
@@ -127,7 +128,7 @@ public class LoginUsuario {
     public void setRoot(Pane root) {
         this.root = root;
     }
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

@@ -94,19 +94,13 @@ Connection con;
         
         
         Viewquery="select * from Articulo ";
-        //                                   %s para int     \"%s\"   para varchar
         Addquery="Insert into cliente values (%s,\"%s\", %s, \"%s\", \"%s\");";
         Delquery="DELETE FROM cliente\n" +"WHERE id=";
         Modquery="UPDATE articulo SET nombre=\"%s\", telefono= %s, direccion=\"%s\", mail=\"%s\" WHERE id=%s";
         
         
         buildData(Viewquery);
-        Buscar.setOnAction(e->{
-            ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
-            if (rowList!=null){
-                
-            }
-        });
+       
         Del.setOnAction(e->{
            
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
@@ -139,7 +133,7 @@ Connection con;
         });
         Menu.setOnAction(e->{
             MenuP m= new MenuP(con);
-        Cargar_Scene(new Scene(m.getRoot(), 800, 400),"Menu");
+        Cargar_Scene(new Scene(m.getRoot(), 800, 400));
         });
         Buscar.setOnAction(e->  {
              BuscarEvent();
@@ -228,7 +222,7 @@ Connection con;
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
+                
             }
 
             /**
@@ -237,14 +231,14 @@ Connection con;
              *******************************
              */
             while (rs.next()) {
-                //Iterate Row
+                
                 ObservableList<String> row = FXCollections.observableArrayList();
                 for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //Iterate Column
+                   
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
+               
                 data.add(row);
 
             }
@@ -252,8 +246,7 @@ Connection con;
             //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+            System.err.println("Error on Building Data: "+e.getMessage());
         }
     }
     public void ExecuteQuery(String query){
@@ -261,12 +254,12 @@ Connection con;
             st.execute(query);
             buildData(this.Viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            System.err.println("Error in SQL code: "+ex.getMessage());
         }
         
     }
     
-    public void Cargar_Scene(Scene scene,String titulo)  {
+    public void Cargar_Scene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          
