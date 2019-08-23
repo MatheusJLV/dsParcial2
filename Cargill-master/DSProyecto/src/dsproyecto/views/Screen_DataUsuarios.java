@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +28,8 @@ import javafx.stage.Stage;
  * @author medin
  */
 public class Screen_DataUsuarios {
+                   private static final Logger logger = Logger.getLogger(Screen_DataUsuarios.class.getName());
+
     Label lbl1=new Label();
     Label lbl2=new Label();
     Label lbl3=new Label();
@@ -105,7 +109,7 @@ public class Screen_DataUsuarios {
 
                 
             } catch (Exception r) {
-                System.err.println("Error con datos: "+ r.getMessage());
+logger.log(Level.SEVERE, r.getMessage(), r);
             }Stage s=((Stage) btn1.getScene().getWindow());
             s.close();
             
@@ -158,7 +162,7 @@ public class Screen_DataUsuarios {
                 
                 
             } catch (Exception r) {
-                System.err.println("Error con datos: "+ r.getMessage());
+logger.log(Level.SEVERE, r.getMessage(), r);
             }Stage s=((Stage) btn1.getScene().getWindow());
             s.close();
             
@@ -246,7 +250,7 @@ public class Screen_DataUsuarios {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error: "+e.getMessage());
+logger.log(Level.SEVERE, e.getMessage(), e);
         }
     
         
@@ -259,7 +263,7 @@ public class Screen_DataUsuarios {
             st.executeUpdate(query);
             
         } catch (SQLException ex) {
-            System.err.println("Error in SQL code: "+ex.getMessage());
+logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }  

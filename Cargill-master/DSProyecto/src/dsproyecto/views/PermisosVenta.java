@@ -25,15 +25,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import java.util.logging.*;
 
 /**
  *
  * @author MatheusJLV
  */
 public class PermisosVenta {
+    private static final Logger logger = Logger.getLogger(PermisosVenta.class.getName());
+
     Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
@@ -160,6 +162,7 @@ public class PermisosVenta {
             Integer.parseInt(cadena);
             resultado = true;
         } catch (NumberFormatException excepcion) {
+            logger.log(Level.SEVERE, excepcion.getMessage(), excepcion);
             resultado = false;
         }
 
@@ -217,16 +220,14 @@ public class PermisosVenta {
             tableview.setItems(data);
         } catch (Exception e) {
             
-            System.err.println("Error on Building Data: "+e.getMessage());
-        }
+logger.log(Level.SEVERE, e.getMessage(), e);        }
     }
     public void executeQuery(String query){
         try (Statement st = con.createStatement();){
             st.execute(query);
             buildData(this.viewquery);
         } catch (SQLException ex) {
-            System.err.println("Error in SQL code: "+ex.getMessage());
-        }
+logger.log(Level.SEVERE, ex.getMessage(), ex);        }
         
     }
     

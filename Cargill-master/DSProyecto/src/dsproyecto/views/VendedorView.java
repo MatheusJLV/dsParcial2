@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,6 +36,8 @@ import javafx.util.Callback;
  * @author medin
  */
 public class VendedorView {
+    private static final Logger logger = Logger.getLogger(VendedorView.class.getName());
+
     Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
@@ -180,6 +184,8 @@ public class VendedorView {
             Integer.parseInt(cadena);
             resultado = true;
         } catch (NumberFormatException excepcion) {
+            logger.log(Level.SEVERE, excepcion.getMessage(), excepcion);
+
             resultado = false;
         }
 
@@ -236,7 +242,7 @@ public class VendedorView {
             //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            System.err.println("Error on Building Data: "+e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
     public void executeQuery(String query){
@@ -244,7 +250,7 @@ public class VendedorView {
             st.execute(query);
             buildData(this.viewquery);
         } catch (SQLException ex) {
-            System.err.println("Error in SQL code: "+ex.getMessage());
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }

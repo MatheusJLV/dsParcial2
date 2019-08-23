@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,6 +36,8 @@ import javafx.util.Callback;
  * @author medin
  */
 public class buscarUsuarios {
+        private static final Logger logger = Logger.getLogger(buscarUsuarios.class.getName());
+
     Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
@@ -169,6 +173,8 @@ public class buscarUsuarios {
             Integer.parseInt(cadena);
             resultado = true;
         } catch (NumberFormatException excepcion) {
+                        logger.log(Level.SEVERE, excepcion.getMessage(), excepcion);
+
             resultado = false;
         }
 
@@ -227,7 +233,7 @@ public class buscarUsuarios {
             tableview.setItems(data);
         } catch (Exception e) {
             //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
     public void executeQuery(String query){
@@ -235,7 +241,7 @@ public class buscarUsuarios {
             st.execute(query);
             buildData(this.viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }

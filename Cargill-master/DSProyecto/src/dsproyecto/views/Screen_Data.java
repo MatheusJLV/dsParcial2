@@ -20,12 +20,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.logging.*;
 
 /**
  *
  * @author medin
  */
 public class Screen_Data {
+       private static final Logger logger = Logger.getLogger(Screen_Data.class.getName());
+
     Label lbox1=new Label();
     Label lbox2=new Label();
     Label lbox3=new Label();
@@ -97,7 +100,7 @@ public class Screen_Data {
                
                 
             } catch (Exception r) {
-                System.err.println("Error con datos: "+ r.getMessage());
+logger.log(Level.SEVERE, r.getMessage(), r);
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -150,7 +153,7 @@ public class Screen_Data {
                 
                 
             } catch (Exception r) {
-                System.err.println("Error con datos: "+ r.getMessage());
+logger.log(Level.SEVERE, r.getMessage(), r);
             }Stage s=((Stage) bt.getScene().getWindow());
             s.close();
             
@@ -232,7 +235,7 @@ public class Screen_Data {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error: "+e.getMessage());
+logger.log(Level.SEVERE, e.getMessage(), e);
         }
     
         
@@ -245,7 +248,7 @@ public class Screen_Data {
             st.executeUpdate(query);
             
         } catch (SQLException ex) {
-            System.err.println("Error in SQL code: "+ex.getMessage());
+logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }  

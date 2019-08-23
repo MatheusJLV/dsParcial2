@@ -20,6 +20,7 @@ import javafx.stage.Stage;
  * @author MatheusJLV
  */
 public class menuGerente {
+    
     Connection con;
     VBox col1=new VBox(20);
     VBox col2=new VBox(20);

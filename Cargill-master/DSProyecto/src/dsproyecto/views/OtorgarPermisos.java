@@ -25,15 +25,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
+import java.util.logging.*;
 /**
  *
  * @author MatheusJLV
  */
 public class OtorgarPermisos {
+       private static final Logger logger = Logger.getLogger(OtorgarPermisos.class.getName());
+
      Connection con;
     Pane root=new Pane();
     HBox head=new HBox(50);
@@ -112,18 +113,18 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=1 and idUsuario ="+lblfield2.getText());
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(1,"+lblfield2.getText()+")");
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
             } catch(Exception except){
-              System.err.print("error");
+         logger.log(Level.SEVERE, except.getMessage(), except);
             }
 
            } 
@@ -146,18 +147,18 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=2 and idUsuario ="+lblfield2.getText());
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(2,"+lblfield2.getText()+")");
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
             } catch(Exception except){
-              System.err.print(except.toString());
+         logger.log(Level.SEVERE, except.getMessage(), except);
             }
 
            } 
@@ -181,18 +182,18 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=3 and idUsuario ="+lblfield2.getText());
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(3,"+lblfield2.getText()+")");
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
             } catch(Exception except){
-              System.err.print(except.toString());
+         logger.log(Level.SEVERE, except.getMessage(), except);
             }
 
            } 
@@ -216,18 +217,18 @@ public class OtorgarPermisos {
                     con.createStatement().execute("delete from tablapermiso where idPermiso=4 and idUsuario ="+lblfield2.getText());
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             } else{
                 try {
                     con.createStatement().execute("insert into TablaPermiso(idPermiso, idUsuario) values(4,"+lblfield2.getText()+")");
                     buildData(this.viewquery);
                 } catch (SQLException ex) {
-                    System.err.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
             } catch(Exception except){
-              System.err.print(except.toString());
+         logger.log(Level.SEVERE, except.getMessage(), except);
             }
 
            } 
@@ -282,13 +283,13 @@ public class OtorgarPermisos {
     }
     public boolean isNumeric(String cadena) {
 
-        boolean resultado;
+        boolean resultado=false;
 
         try {
             Integer.parseInt(cadena);
             resultado = true;
         } catch (NumberFormatException excepcion) {
-            resultado = false;
+         logger.log(Level.SEVERE, excepcion.getMessage(), excepcion);
         }
 
         return resultado;
@@ -331,8 +332,7 @@ public class OtorgarPermisos {
             //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println("Error on Building Data: "+e.getMessage());
+         logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
     public void executeQuery(String query){
@@ -340,7 +340,7 @@ public class OtorgarPermisos {
             st.execute(query);
             buildData(this.viewquery);
         } catch (SQLException ex) {
-            System.out.println("Error in SQL code: "+ex.getMessage());
+         logger.log(Level.SEVERE, ex.getMessage(), ex);
         }
         
     }
