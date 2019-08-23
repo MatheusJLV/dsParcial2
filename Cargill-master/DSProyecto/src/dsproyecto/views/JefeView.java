@@ -51,10 +51,7 @@ class JefeView {
             ingresarDatosExtra();
         });
         
-        btnPermisosExtra.setOnAction(e->{
-            System.out.print("este no se que hace :v");
-        });
-        
+
         arriba.getChildren().addAll(btnsolicitarEnvio,btnsolicitarAbastecimiento,crearOrdenDeAbastecimiento,
                 btnPantallaEnvios,btnRegistrodeReporte,btnPermisosExtra);
         

@@ -7,6 +7,8 @@ package dsproyecto.views;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -28,14 +30,14 @@ import javafx.stage.Stage;
 public class LoginUsuario {
     private static Connection con;
     // Declaramos los datos de conexion de Usuarios
-   
-    private static final String user="jlmedina";
-    private static final String pass="1234";
+   private static final Logger logger = Logger.getLogger(LoginUsuario.class.getName());
+    private static final String USR="jlmedina";
+    private static final String PASSW="1234";
     HBox hb1 = new HBox(20);
     HBox hb2 = new HBox(20);
     HBox hb3 = new HBox(20);
     
-    TextField txt1=new TextField(user);
+    TextField txt1=new TextField(USR);
     TextField txt2=new PasswordField();
     Button Conect= new Button("Ingresar");
     Label iuser= new Label("User:");
@@ -87,7 +89,7 @@ public class LoginUsuario {
                       
                 
             } catch (Exception x) {
-                System.err.println(x.toString());
+                logger.log(Level.SEVERE, x.toString(), x);
             }
                 
             
@@ -116,7 +118,7 @@ public class LoginUsuario {
         + "-fx-border-radius: 5;" + "-fx-border-color: grey;");
         vb1.setMaxSize(400, 200);
         vb1.setMinSize(400, 200);
-        txt1.setText(pass);
+        txt1.setText(PASSW);
         root.getChildren().add(vb1);
         
         

@@ -26,10 +26,10 @@ import javafx.stage.Stage;
 public class Login {
 
     private static Connection con;
-    private static final String driver="com.mysql.jdbc.Driver";
-    private static final String user="root";
-    private static final String pass="root";
-    private static final String url="jdbc:mysql://localhost:3306/disenosoft ?useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&allowMultiQueries=TRUE";
+    private static final String DRIVER="com.mysql.jdbc.Driver";
+    private static final String USER="root";
+    private static final String PASS="root";
+    private static final String URL="jdbc:mysql://localhost:3306/disenosoft ?useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&allowMultiQueries=TRUE";
    
     HBox Hb1 = new HBox(20);
     HBox Hb2 = new HBox(20);
@@ -38,7 +38,7 @@ public class Login {
     TextField tEstado=new TextField("Server: 192.168.56.102");
     
     
-    TextField txt1=new TextField(user);
+    TextField txt1=new TextField(USER);
     TextField txt2=new PasswordField();
     Button connect= new Button("Conectar");
     Label iuser= new Label("User:");
@@ -65,7 +65,7 @@ public class Login {
         vBox1.setMinSize(400, 200);
         
         
-        txt2.setText(pass);
+        txt2.setText(PASS);
         root.getChildren().add(vBox1);
         
         connect.setOnAction(e->{
@@ -77,9 +77,9 @@ public class Login {
     public  void conectar()  {
         con=null;
         try{
-            Class.forName(driver);
+            Class.forName(DRIVER);
            
-            con= DriverManager.getConnection(url, txt1.getText(), txt2.getText());
+            con= DriverManager.getConnection(URL, txt1.getText(), txt2.getText());
           
             if (con!=null){
                tEstado.setText("Conexion establecida");
