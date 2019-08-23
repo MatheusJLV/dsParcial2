@@ -63,7 +63,6 @@ public class LoginUsuario {
                 
 
                 }
-                System.err.println(cargo);
                    
                     switch (cargo){
                             case "Vendedor":
@@ -83,7 +82,7 @@ public class LoginUsuario {
                                 Scene sceneJefe = new Scene(jv.getRoot(),800,400);
                                 break;
                             default:
-                                System.out.println(" Nada ");
+                                logger.log(Level.SEVERE, "holi");
                                 break;
                     }
                       

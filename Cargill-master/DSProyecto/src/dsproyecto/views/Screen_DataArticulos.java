@@ -145,10 +145,10 @@ logger.log(Level.SEVERE, r.getMessage(), r);
                     String str=String.format(Updatequery, data.toArray());
                     
                     executeQuery(str);
-                    System.out.println(str);
+                    logger.log(Level.SEVERE, "holi");  
                 }else{
                     String str=String.format(Updatequery,data.toArray());
-                    System.out.println(str);
+                    logger.log(Level.SEVERE, "holi");  
                     executeQuery(str);
                 }
                 
@@ -169,7 +169,8 @@ logger.log(Level.SEVERE, r.getMessage(), r);
             if(!t.isDisabled()){
                 if(t.getText()==null){
                     t.setText("null");
-                }if(t.getText().equals("")){
+                }
+                if(t.getText().equals("")){
                     t.setText("null");
                 }
                 data.add(t.getText());}
@@ -226,7 +227,6 @@ logger.log(Level.SEVERE, r.getMessage(), r);
                 
             }
             if(add0==1){
-                //System.out.println(this.query+" where "+l1.getText()+" = "+rowList.get(0));
                 while (rs2.next()) {
                     //Iterate Row
 

@@ -244,7 +244,7 @@ public class OtorgarPermisos {
         });
         regresar.setOnAction(e->{
             MenuP m= new MenuP(con);
-        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400));
         });
         buscar.setOnAction(e->  {
              buscarEvent();
@@ -345,8 +345,8 @@ public class OtorgarPermisos {
         
     }
     
-    public void cargarScene(Scene scene,String titulo)  {
-         
+    public void cargarScene(Scene scene)  {
+        
          Stage st= (Stage)root.getScene().getWindow();
          
          st.setScene(scene);

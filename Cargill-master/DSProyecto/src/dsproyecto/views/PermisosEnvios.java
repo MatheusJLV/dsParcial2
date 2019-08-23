@@ -96,9 +96,7 @@ public class PermisosEnvios {
         buildData(viewquery);
         busqueda.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
-            if (rowList!=null){
-                
-            }
+
         });
 
         
@@ -218,14 +216,9 @@ public class PermisosEnvios {
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
             }
 
-            /**
-             * ******************************
-             * Data added to ObservableList *
-             *******************************
-             */
+
             while (rs.next()) {
                 
                 ObservableList<String> row = FXCollections.observableArrayList();

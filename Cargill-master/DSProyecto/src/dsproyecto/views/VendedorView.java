@@ -102,9 +102,7 @@ public class VendedorView {
         buildData(viewquery);
         btnBuscar.setOnAction(e->{
             ObservableList rowList = (ObservableList) tableview.getSelectionModel().getSelectedItem();
-            if (rowList!=null){
-                
-            }
+
         });
         btnDel.setOnAction(e->{
            
@@ -138,7 +136,7 @@ public class VendedorView {
         });
         btnMENU.setOnAction(e->{
             MenuP m= new MenuP(con);
-        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400));
         });
         btnBuscar.setOnAction(e->  {
              buscarEvent();
@@ -255,7 +253,7 @@ public class VendedorView {
         
     }
     
-    public void cargarScene(Scene scene,String titulo)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

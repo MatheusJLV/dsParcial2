@@ -126,7 +126,7 @@ public class buscarUsuarios {
         });
         btnMenu1.setOnAction(e->{
             MenuP m= new MenuP(con);
-        cargarScene(new Scene(m.getRoot(), 800, 400),"Menu");
+        cargarScene(new Scene(m.getRoot(), 800, 400));
         });
         btnBuscar.setOnAction(e->  {
              buscarEvent();
@@ -208,7 +208,6 @@ public class buscarUsuarios {
                 });
 
                 tableview.getColumns().addAll(col);
-                //System.out.println("Column [" + i + "] ");
             }
 
             /**
@@ -224,7 +223,6 @@ public class buscarUsuarios {
                     if(rs.getString(i)==null){row.add("null");}else{row.add(rs.getString(i));}
                     
                 }
-                //System.out.println("Row [1] added " + row);
                 data.add(row);
 
             }
@@ -232,7 +230,6 @@ public class buscarUsuarios {
             //FINALLY ADDED TO TableView
             tableview.setItems(data);
         } catch (Exception e) {
-            //e.printStackTrace();
             logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
@@ -246,7 +243,7 @@ public class buscarUsuarios {
         
     }
     
-    public void cargarScene(Scene scene,String titulo)  {
+    public void cargarScene(Scene scene)  {
          
          Stage st= (Stage)root.getScene().getWindow();
          

@@ -153,11 +153,11 @@ logger.log(Level.SEVERE, r.getMessage(), r);
                     String str=String.format(Updatequery, data.toArray());
                     
                     executeQuery(str);
-                    System.out.println(str);
+logger.log(Level.SEVERE, "holi");  
                 }else{
                     String str=String.format(Updatequery,data.toArray());
-                    System.out.println(str);
-                    executeQuery(str);
+logger.log(Level.SEVERE, "holi");  
+executeQuery(str);
                 }
                 
                 
@@ -177,7 +177,8 @@ logger.log(Level.SEVERE, r.getMessage(), r);
             if(!t.isDisabled()){
                 if(t.getText()==null){
                     t.setText("null");
-                }if(t.getText().equals("")){
+                }
+                if(t.getText().equals("")){
                     t.setText("null");
                 }
                 data.add(t.getText());}
@@ -206,7 +207,6 @@ logger.log(Level.SEVERE, r.getMessage(), r);
     fila4.getChildren().addAll(lbl7,texto7,lbl8,texto8);
     fila6.getChildren().addAll(lbl9,texto9,lbl10,texto10);
     contenedor1.getChildren().addAll(fila1,fila2,fila3,fila4,fila6,lbl11,btn1);
-    //c1.setMinSize(320, 400);
     contenedor1.setPadding(new Insets(20, 20, 20, 20));
     contenedor1.setAlignment(Pos.CENTER);
     root.getChildren().add(contenedor1);
@@ -214,7 +214,6 @@ logger.log(Level.SEVERE, r.getMessage(), r);
     
     
     
-    //root.getStylesheets().add("/estilo/estilos.css");
     
     }
     
@@ -238,7 +237,6 @@ logger.log(Level.SEVERE, r.getMessage(), r);
                 
             }
             if(add0==1){
-                //System.out.println(this.query+" where "+lbl1.getText()+" = "+rowList.get(0));
                 while (rs2.next()) {
                     //Iterate Row
 
